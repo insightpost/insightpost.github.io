@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>研究报告合集 · Data-Driven Research Reports</title>
+  <meta name="description" content="数据驱动的研究报告合集：AI 重塑工作、中信集团子公司洞察、2026 工作趋势指数。">
+  <style>
+    :root {
+      --bg: #0b0f19;
+      --bg2: #121726;
+      --surface: #161c2e;
+      --surface2: #1a2035;
+      --ink: #f0f2f7;
+      --muted: #8b92a8;
+      --faint: #5b6275;
+      --rule: #2a314a;
+      --accent: #00d4aa;
+      --font: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      --font-mono: 'SF Mono', 'JetBrains Mono', Consolas, 'Liberation Mono', monospace;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      color: var(--ink);
+      background: var(--bg);
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    /* ambient background glow */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(900px 500px at 12% -8%, rgba(0, 212, 170, 0.10), transparent 60%),
+        radial-gradient(800px 500px at 92% 0%, rgba(91, 141, 239, 0.10), transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* ---------- Top bar ---------- */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--rule);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      letter-spacing: 0.04em;
+      color: var(--ink);
+    }
+    .brand .dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 12px var(--accent);
+    }
+    .count-badge {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--muted);
+      border: 1px solid var(--rule);
+      padding: 0.3rem 0.7rem;
+      border-radius: 50px;
+      background: var(--bg2);
+    }
+    .count-badge b { color: var(--accent); font-weight: 600; }
+
+    /* ---------- Hero ---------- */
+    .hero {
+      padding: 4.5rem 0 3rem;
+      border-bottom: 1px solid var(--rule);
+      margin-bottom: 3.5rem;
+    }
+    .kicker {
+      color: var(--accent);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 1.25rem;
+    }
+    .hero h1 {
+      font-size: clamp(2.1rem, 5vw, 3.4rem);
+      line-height: 1.12;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.1rem;
+      background: linear-gradient(120deg, #ffffff 0%, #c7d0e6 60%, #8b92a8 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero .lede {
+      color: var(--muted);
+      font-size: 1.12rem;
+      max-width: 640px;
+      line-height: 1.65;
+    }
+    .hero .stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2.5rem;
+      margin-top: 2.5rem;
+    }
+    .stat .n {
+      font-family: var(--font-mono);
+      font-size: 1.6rem;
+      font-weight: 600;
+      color: var(--ink);
+    }
+    .stat .l {
+      font-size: 0.82rem;
+      color: var(--faint);
+      letter-spacing: 0.04em;
+    }
+
+    /* ---------- Cards grid ---------- */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 5rem;
+    }
+
+    .card {
+      --c: var(--accent);
+      --strip: var(--c);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(180deg, var(--surface2) 0%, var(--surface) 100%);
+      border: 1px solid var(--rule);
+      border-radius: 16px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: transform .28s cubic-bezier(.2,.7,.2,1), box-shadow .28s ease, border-color .28s ease;
+      isolation: isolate;
+    }
+    .card::before {
+      content: '';
+      display: block;
+      height: 5px;
+      background: var(--strip);
+      opacity: 0.95;
+    }
+    .card::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(420px 200px at 50% -10%, color-mix(in srgb, var(--c) 16%, transparent), transparent 70%);
+      opacity: 0;
+      transition: opacity .28s ease;
+      pointer-events: none;
+      z-index: -1;
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: color-mix(in srgb, var(--c) 55%, var(--rule));
+      box-shadow: 0 18px 50px -20px var(--c), 0 6px 16px -10px rgba(0,0,0,0.6);
+    }
+    .card:hover::after { opacity: 1; }
+
+    .card-body {
+      padding: 1.6rem 1.6rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+    .card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 1.1rem;
+    }
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      color: var(--c);
+      border: 1px solid color-mix(in srgb, var(--c) 40%, transparent);
+      background: color-mix(in srgb, var(--c) 10%, transparent);
+      padding: 0.22rem 0.6rem;
+      border-radius: 50px;
+      white-space: nowrap;
+    }
+    .card-date {
+      font-family: var(--font-mono);
+      font-size: 0.78rem;
+      color: var(--faint);
+    }
+    .card h2 {
+      font-size: 1.28rem;
+      line-height: 1.35;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+    .card-summary {
+      color: var(--muted);
+      font-size: 0.93rem;
+      line-height: 1.62;
+      flex: 1;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 1.4rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--rule);
+    }
+    .card-source {
+      font-size: 0.85rem;
+      color: var(--ink);
+      font-weight: 500;
+    }
+    .card-source .by {
+      color: var(--faint);
+      font-size: 0.76rem;
+      font-family: var(--font-mono);
+      display: block;
+      letter-spacing: 0.04em;
+    }
+    .card-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--c);
+      transition: gap .2s ease;
+    }
+    .card:hover .card-cta { gap: 0.7rem; }
+    .card-cta .arr { transition: transform .2s ease; }
+    .card:hover .card-cta .arr { transform: translateX(2px); }
+
+    /* ---------- bottom spacing ---------- */
+    main { padding-bottom: 5rem; }
+
+    @media (max-width: 720px) {
+      .hero { padding: 3rem 0 2.2rem; }
+      .hero .stats { gap: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="topbar">
+      <div class="brand"><span class="dot"></span>研究报告合集 / Research Reports</div>
+      <div class="count-badge">共 <b id="count">0</b> 份报告</div>
+    </div>
+
+    <header class="hero">
+      <div class="kicker">Data-Driven Research Reports</div>
+      <h1>研究报告合集</h1>
+      <p class="lede">汇集数据驱动的研究洞察报告 —— 从 AI 对劳动力市场的重塑，到央企财务全景，再到全球工作趋势指数。点击卡片阅读完整报告。</p>
+      <div class="stats">
+        <div class="stat"><div class="n" id="stat-reports">0</div><div class="l">研究报告</div></div>
+        <div class="stat"><div class="n">3</div><div class="l">数据来源机构</div></div>
+        <div class="stat"><div class="n">2026</div><div class="l">年度洞察</div></div>
+      </div>
+    </header>
+
+    <main>
+      <section class="grid" id="grid" aria-label="报告列表"></section>
+    </main>
+  </div>
+
+  <script>
+    /* =====================================================================
+       报告清单 —— 新增报告只需在此数组追加一项（见页脚“如何新增报告”）
+       字段说明：
+         dir     报告目录名（相对于本 index.html）
+         file    入口 HTML 文件名
+         title   卡片标题（通常取自报告 <h1>）
+         source  来源机构
+         date    日期/版本
+         tag     分类标签
+         summary 一句话摘要（建议 ≤ 80 字，超出自动截断 4 行）
+         accent  顶部色条：纯色或 CSS linear-gradient(...)
+         glow    悬浮发光色（纯色，用于阴影与高亮）
+       数组顺序即展示顺序。
+       ===================================================================== */
+    const REPORTS = [
+      {
+        dir: 'ai-reshaping-work-2026',
+        file: 'ai-reshaping-work-2026.html',
+        title: 'AI 重塑工作：2026 核心洞察与完整数据',
+        source: 'Cognizant Research',
+        date: '2026.01',
+        tag: '劳动力 · AI 影响',
+        summary: '基于对 18,000 项任务、近 1,000 个职业的重新评估，AI 对劳动力市场的影响速度比三年前预测的更快、更深、更广。',
+        accent: '#00d4aa',
+        glow: '#00d4aa'
+      },
+      {
+        dir: 'citic-subsidiaries-analysis',
+        file: 'citic-subsidiaries-analysis.html',
+        title: '中信集团子公司营收与利润洞察报告',
+        source: 'CITIC Group',
+        date: '2026.07',
+        tag: '金融 · 央企财报',
+        summary: '基于 2025 年年度报告数据，全景剖析中信集团 22 家上市及核心非上市子公司经营表现，覆盖综合金融、先进智造、先进材料、新消费、新型城镇化五大业务板块。',
+        accent: '#c41e3a',
+        glow: '#e8475f'
+      },
+      {
+        dir: 'work-trend-report-2026',
+        file: 'index.html',
+        title: '2026 工作趋势指数',
+        source: 'Microsoft',
+        date: '2026',
+        tag: '工作趋势 · 智能体',
+        summary: '智能体、人类能动性与每个组织的机遇。覆盖 20,000+ 受访者、27 个国家/地区，深度分析与可视化洞察。',
+        accent: 'linear-gradient(135deg, #0078D4 0%, #00BCF2 50%, #8661C5 100%)',
+        glow: '#3a8fd4'
+      }
+    ];
+
+    const grid = document.getElementById('grid');
+    const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+    grid.innerHTML = REPORTS.map(r => `
+      <a class="card" href="./${r.dir}/${r.file}" style="--c:${r.glow}; --strip:${r.accent};">
+        <div class="card-body">
+          <div class="card-head">
+            <span class="tag">${esc(r.tag)}</span>
+            <span class="card-date">${esc(r.date)}</span>
+          </div>
+          <h2>${esc(r.title)}</h2>
+          <p class="card-summary">${esc(r.summary)}</p>
+          <div class="card-foot">
+            <span class="card-source">
+              ${esc(r.source)}
+              <span class="by">SOURCE</span>
+            </span>
+            <span class="card-cta">阅读报告 <span class="arr">→</span></span>
+          </div>
+        </div>
+      </a>
+    `).join('');
+
+    document.getElementById('count').textContent = REPORTS.length;
+    document.getElementById('stat-reports').textContent = REPORTS.length;
+  </script>
+</body>
+</html>
