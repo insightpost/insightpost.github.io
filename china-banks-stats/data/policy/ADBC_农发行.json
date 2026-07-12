@@ -1,0 +1,167 @@
+{
+  "schemaVersion": "1.0.0",
+  "bankInfo": {
+    "bankId": "ADBC",
+    "bankName": {
+      "chineseName": "中国农业发展银行",
+      "englishName": "Agricultural Development Bank of China",
+      "shortName": "农发行"
+    },
+    "bankType": "policy_bank",
+    "establishmentDate": "1994-11-08",
+    "headquarters": {
+      "province": "北京市",
+      "city": "北京市"
+    },
+    "listingInfo": {
+      "isListed": false,
+      "aShareCode": null,
+      "hShareCode": null
+    }
+  },
+  "annualData": {
+    "2016": {
+      "scale": {
+        "totalAssets": 56163,
+        "totalLoans": 41000
+      },
+      "profitability": {
+        "netProfit": 162
+      },
+      "assetQuality": {
+        "NPLRatio": 0.88
+      },
+      "capitalAdequacy": {}
+    },
+    "2017": {
+      "scale": {
+        "totalAssets": 62215,
+        "totalLoans": 46600
+      },
+      "profitability": {
+        "netProfit": 171
+      },
+      "assetQuality": {
+        "NPLRatio": 0.81
+      },
+      "capitalAdequacy": {}
+    },
+    "2019": {
+      "scale": {
+        "totalAssets": 70000,
+        "totalLoans": 55900
+      },
+      "profitability": {
+        "netProfit": 192
+      },
+      "assetQuality": {
+        "NPLRatio": 0.61
+      },
+      "capitalAdequacy": {}
+    },
+    "2020": {
+      "scale": {
+        "totalLoans": 61400
+      },
+      "profitability": {},
+      "assetQuality": {
+        "NPLRatio": 0.36
+      },
+      "capitalAdequacy": {}
+    },
+    "2021": {
+      "scale": {
+        "totalAssets": 80000,
+        "totalLoans": 66900
+      },
+      "profitability": {},
+      "assetQuality": {
+        "NPLRatio": 0.36
+      },
+      "capitalAdequacy": {}
+    },
+    "2022": {
+      "scale": {
+        "totalAssets": 90864,
+        "totalLoans": 77400
+      },
+      "profitability": {
+        "netProfit": 311
+      },
+      "assetQuality": {
+        "NPLRatio": 0.3
+      },
+      "capitalAdequacy": {}
+    },
+    "2023": {
+      "scale": {
+        "totalAssets": 100000,
+        "totalLoans": 87900
+      },
+      "profitability": {},
+      "assetQuality": {},
+      "capitalAdequacy": {}
+    },
+    "2024": {
+      "scale": {
+        "totalAssets": 106505,
+        "totalLoans": 96400
+      },
+      "profitability": {
+        "netProfit": 398
+      },
+      "assetQuality": {
+        "NPLRatio": 0.44
+      },
+      "capitalAdequacy": {}
+    }
+  },
+  "metadata": {
+    "dataSource": [
+      "annual_report",
+      "official_disclosure",
+      "news_reports"
+    ],
+    "lastUpdated": "2026-07-12T16:51:31",
+    "unitConvention": {
+      "currency": "CNY",
+      "amountUnit": "hundred_million_yuan",
+      "ratioUnit": "percent"
+    },
+    "notes": [
+      {
+        "year": 2016,
+        "note": "数据来源：新华社2017年1月报道"
+      },
+      {
+        "year": 2017,
+        "note": "数据来源：农发行2017年年度报告"
+      },
+      {
+        "year": 2019,
+        "note": "数据来源：农发行2020年年度工作会议"
+      },
+      {
+        "year": 2020,
+        "note": "数据来源：新华社2021年1月报道"
+      },
+      {
+        "year": 2021,
+        "note": "数据来源：农发行2022年年度报告"
+      },
+      {
+        "year": 2022,
+        "note": "数据来源：农发行2022年年度报告"
+      },
+      {
+        "year": 2023,
+        "note": "数据来源：农发行2024年年度工作会议"
+      },
+      {
+        "year": 2024,
+        "note": "数据来源：农发行2024年年报"
+      }
+    ],
+    "disclaimer": "政策性银行不对外披露完整年报，数据来源于公开报道和年度工作会议披露，部分数据为估算值，仅供参考。"
+  }
+}

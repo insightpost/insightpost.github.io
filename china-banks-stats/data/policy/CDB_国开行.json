@@ -1,0 +1,205 @@
+{
+  "schemaVersion": "1.0.0",
+  "bankInfo": {
+    "bankId": "CDB",
+    "bankName": {
+      "chineseName": "国家开发银行",
+      "englishName": "China Development Bank",
+      "shortName": "国开行"
+    },
+    "bankType": "policy_bank",
+    "establishmentDate": "1994-03-17",
+    "headquarters": {
+      "province": "北京市",
+      "city": "北京市"
+    },
+    "listingInfo": {
+      "isListed": false,
+      "aShareCode": null,
+      "hShareCode": null
+    }
+  },
+  "annualData": {
+    "2016": {
+      "scale": {
+        "totalAssets": 143405,
+        "totalLoans": 103181
+      },
+      "profitability": {
+        "netProfit": 1097
+      },
+      "assetQuality": {
+        "NPLRatio": 0.88
+      },
+      "capitalAdequacy": {
+        "CAR": 11.57
+      }
+    },
+    "2017": {
+      "scale": {
+        "totalAssets": 159593,
+        "totalLoans": 110368
+      },
+      "profitability": {
+        "netProfit": 1136
+      },
+      "assetQuality": {
+        "NPLRatio": 0.7
+      },
+      "capitalAdequacy": {
+        "CAR": 11.57
+      }
+    },
+    "2018": {
+      "scale": {
+        "totalAssets": 161798,
+        "totalLoans": 116789
+      },
+      "profitability": {
+        "netProfit": 1121
+      },
+      "assetQuality": {
+        "NPLRatio": 0.92
+      },
+      "capitalAdequacy": {
+        "CAR": 11.81
+      }
+    },
+    "2019": {
+      "scale": {
+        "totalAssets": 165046,
+        "totalLoans": 122005
+      },
+      "profitability": {
+        "netProfit": 1185
+      },
+      "assetQuality": {
+        "NPLRatio": 0.95
+      },
+      "capitalAdequacy": {
+        "CAR": 11.71
+      }
+    },
+    "2020": {
+      "scale": {
+        "totalAssets": 171036,
+        "totalLoans": 130499
+      },
+      "profitability": {
+        "netProfit": 1188
+      },
+      "assetQuality": {
+        "NPLRatio": 0.79
+      },
+      "capitalAdequacy": {
+        "CAR": 12.03
+      }
+    },
+    "2021": {
+      "scale": {
+        "totalAssets": 171679,
+        "totalLoans": 127917
+      },
+      "profitability": {
+        "netProfit": 808
+      },
+      "assetQuality": {
+        "NPLRatio": 0.84
+      },
+      "capitalAdequacy": {
+        "CAR": 11.66
+      }
+    },
+    "2022": {
+      "scale": {
+        "totalAssets": 182400,
+        "totalLoans": 139000
+      },
+      "profitability": {
+        "netProfit": 843
+      },
+      "assetQuality": {
+        "NPLRatio": 0.78
+      },
+      "capitalAdequacy": {}
+    },
+    "2023": {
+      "scale": {
+        "totalAssets": 186500,
+        "totalLoans": 142400
+      },
+      "profitability": {
+        "netProfit": 874
+      },
+      "assetQuality": {
+        "NPLRatio": 0.58
+      },
+      "capitalAdequacy": {
+        "CAR": 11.65
+      }
+    },
+    "2024": {
+      "scale": {
+        "totalAssets": 186183,
+        "totalLoans": 146888
+      },
+      "profitability": {
+        "netProfit": 890
+      },
+      "assetQuality": {},
+      "capitalAdequacy": {}
+    }
+  },
+  "metadata": {
+    "dataSource": [
+      "annual_report",
+      "official_disclosure",
+      "news_reports"
+    ],
+    "lastUpdated": "2026-07-12T16:51:31",
+    "unitConvention": {
+      "currency": "CNY",
+      "amountUnit": "hundred_million_yuan",
+      "ratioUnit": "percent"
+    },
+    "notes": [
+      {
+        "year": 2016,
+        "note": "数据来源：国开行2020年度报告摘要"
+      },
+      {
+        "year": 2017,
+        "note": "数据来源：国开行2020年度报告摘要"
+      },
+      {
+        "year": 2018,
+        "note": "数据来源：国开行2020年度报告摘要"
+      },
+      {
+        "year": 2019,
+        "note": "数据来源：国开行2019年年度报告"
+      },
+      {
+        "year": 2020,
+        "note": "数据来源：国开行2020年度报告"
+      },
+      {
+        "year": 2021,
+        "note": "数据来源：国开行2021年度报告；净利润同比缩减主要受大额减值损失计提拖累"
+      },
+      {
+        "year": 2022,
+        "note": "数据来源：国开行2022年度报告"
+      },
+      {
+        "year": 2023,
+        "note": "数据来源：国开行2023年年度业绩报告"
+      },
+      {
+        "year": 2024,
+        "note": "数据来源：国开行2024年年报"
+      }
+    ],
+    "disclaimer": "政策性银行不对外披露完整年报，数据来源于公开报道和年度工作会议披露，部分数据为估算值，仅供参考。"
+  }
+}

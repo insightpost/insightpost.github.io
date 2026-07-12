@@ -1,0 +1,161 @@
+{
+  "schemaVersion": "1.0.0",
+  "bankInfo": {
+    "bankId": "EXIM",
+    "bankName": {
+      "chineseName": "中国进出口银行",
+      "englishName": "The Export-Import Bank of China",
+      "shortName": "进出口银行"
+    },
+    "bankType": "policy_bank",
+    "establishmentDate": "1994-07-01",
+    "headquarters": {
+      "province": "北京市",
+      "city": "北京市"
+    },
+    "listingInfo": {
+      "isListed": false,
+      "aShareCode": null,
+      "hShareCode": null
+    }
+  },
+  "annualData": {
+    "2016": {
+      "scale": {
+        "totalAssets": 33344
+      },
+      "profitability": {
+        "netProfit": 50
+      },
+      "assetQuality": {},
+      "capitalAdequacy": {}
+    },
+    "2017": {
+      "scale": {
+        "totalAssets": 36406
+      },
+      "profitability": {
+        "netProfit": -123
+      },
+      "assetQuality": {},
+      "capitalAdequacy": {}
+    },
+    "2018": {
+      "scale": {
+        "totalAssets": 41937,
+        "totalLoans": 33752
+      },
+      "profitability": {
+        "netProfit": 46
+      },
+      "assetQuality": {},
+      "capitalAdequacy": {}
+    },
+    "2020": {
+      "scale": {
+        "totalAssets": 50438,
+        "totalLoans": 43000
+      },
+      "profitability": {
+        "netProfit": 56
+      },
+      "assetQuality": {
+        "NPLRatio": 1.62
+      },
+      "capitalAdequacy": {}
+    },
+    "2022": {
+      "scale": {
+        "totalLoans": 50000
+      },
+      "profitability": {},
+      "assetQuality": {
+        "NPLRatio": 1.36
+      },
+      "capitalAdequacy": {}
+    },
+    "2023": {
+      "scale": {},
+      "profitability": {
+        "netProfit": 88
+      },
+      "assetQuality": {
+        "NPLRatio": 1.18
+      },
+      "capitalAdequacy": {}
+    },
+    "2024": {
+      "scale": {
+        "totalAssets": 64674,
+        "totalLoans": 55300
+      },
+      "profitability": {
+        "netProfit": 29
+      },
+      "assetQuality": {
+        "NPLRatio": 1.03
+      },
+      "capitalAdequacy": {}
+    },
+    "2025": {
+      "scale": {
+        "totalAssets": 60600
+      },
+      "profitability": {
+        "netProfit": 36
+      },
+      "assetQuality": {
+        "NPLRatio": 0.95
+      },
+      "capitalAdequacy": {}
+    }
+  },
+  "metadata": {
+    "dataSource": [
+      "annual_report",
+      "official_disclosure",
+      "news_reports"
+    ],
+    "lastUpdated": "2026-07-12T16:51:31",
+    "unitConvention": {
+      "currency": "CNY",
+      "amountUnit": "hundred_million_yuan",
+      "ratioUnit": "percent"
+    },
+    "notes": [
+      {
+        "year": 2016,
+        "note": "数据来源：进出口银行2016年年报"
+      },
+      {
+        "year": 2017,
+        "note": "数据来源：进出口银行2017年年度报告；亏损主因汇兑损失"
+      },
+      {
+        "year": 2018,
+        "note": "数据来源：进出口银行2018年年度报告"
+      },
+      {
+        "year": 2020,
+        "note": "数据来源：进出口银行年报"
+      },
+      {
+        "year": 2022,
+        "note": "数据来源：进出口银行2023年年度工作会议"
+      },
+      {
+        "year": 2023,
+        "note": "数据来源：进出口银行2024年年报"
+      },
+      {
+        "year": 2024,
+        "note": "数据来源：进出口银行2024年年报"
+      },
+      {
+        "year": 2025,
+        "note": "数据来源：进出口银行2025年度报告"
+      }
+    ],
+    "disclaimer": "政策性银行不对外披露完整年报，数据来源于公开报道和年度工作会议披露，部分数据为估算值，仅供参考。"
+  }
+}

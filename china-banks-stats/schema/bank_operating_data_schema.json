@@ -1,0 +1,165 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schema.bankingdata.org.cn/commercial-bank-v1.0.json",
+  "title": "中国商业银行经营数据Schema",
+  "description": "中国商业银行年度经营数据标准Schema，覆盖规模、盈利、资产质量、资本充足、流动性、成长性六大维度，时间跨度2016-2025年。金额单位统一为亿元人民币，比率单位为百分比(%)。",
+  "type": "object",
+  "required": ["schemaVersion", "bankInfo", "annualData", "metadata"],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Schema版本号"
+    },
+    "bankInfo": {
+      "type": "object",
+      "description": "银行基本信息",
+      "required": ["bankId", "bankName", "bankType", "establishmentDate", "headquarters"],
+      "properties": {
+        "bankId": {
+          "type": "string",
+          "description": "银行唯一标识编码"
+        },
+        "bankName": {
+          "type": "object",
+          "required": ["chineseName", "shortName"],
+          "properties": {
+            "chineseName": {
+              "type": "string",
+              "description": "银行中文全称"
+            },
+            "englishName": {
+              "type": "string",
+              "description": "银行英文全称"
+            },
+            "shortName": {
+              "type": "string",
+              "description": "银行简称"
+            }
+          }
+        },
+        "bankType": {
+          "type": "string",
+          "enum": ["state_owned_large", "joint_stock", "policy_bank", "city_commercial", "rural_commercial"],
+          "description": "银行类型：国有大型商业银行、股份制商业银行、政策性银行、城市商业银行、农村商业银行"
+        },
+        "establishmentDate": {
+          "type": "string",
+          "description": "成立日期"
+        },
+        "headquarters": {
+          "type": "object",
+          "required": ["province", "city"],
+          "properties": {
+            "province": { "type": "string", "description": "总部所在省份/直辖市" },
+            "city": { "type": "string", "description": "总部所在城市" }
+          }
+        },
+        "listingInfo": {
+          "type": "object",
+          "properties": {
+            "isListed": { "type": "boolean", "description": "是否上市" },
+            "aShareCode": { "type": "string", "description": "A股代码" },
+            "hShareCode": { "type": "string", "description": "H股代码" }
+          }
+        }
+      }
+    },
+    "annualData": {
+      "type": "object",
+      "description": "按年度组织的经营数据，key为年份(2016-2025)",
+      "patternProperties": {
+        "^(201[6-9]|202[0-5])$": {
+          "type": "object",
+          "required": ["scale", "profitability", "assetQuality", "capitalAdequacy"],
+          "properties": {
+            "scale": {
+              "type": "object",
+              "required": ["totalAssets", "totalLoans", "totalDeposits"],
+              "properties": {
+                "totalAssets": { "type": "number", "description": "资产总额(亿元)" },
+                "totalLiabilities": { "type": "number", "description": "负债总额(亿元)" },
+                "netAssets": { "type": "number", "description": "净资产(亿元)" },
+                "totalLoans": { "type": "number", "description": "贷款总额(亿元)" },
+                "totalDeposits": { "type": "number", "description": "存款总额(亿元)" }
+              }
+            },
+            "profitability": {
+              "type": "object",
+              "required": ["operatingRevenue", "netProfit", "ROA", "ROE"],
+              "properties": {
+                "operatingRevenue": { "type": "number", "description": "营业收入(亿元)" },
+                "netInterestIncome": { "type": "number", "description": "净利息收入(亿元)" },
+                "nonInterestIncome": { "type": "number", "description": "非利息收入(亿元)" },
+                "netProfit": { "type": "number", "description": "净利润(亿元)" },
+                "netProfitAttributableToParent": { "type": "number", "description": "归母净利润(亿元)" },
+                "netInterestMargin": { "type": "number", "description": "净息差(%)" },
+                "ROA": { "type": "number", "description": "资产利润率(%)" },
+                "ROE": { "type": "number", "description": "资本利润率/净资产收益率(%)" },
+                "costToIncomeRatio": { "type": "number", "description": "成本收入比(%)" },
+                "EPS": { "type": "number", "description": "基本每股收益(元)" }
+              }
+            },
+            "assetQuality": {
+              "type": "object",
+              "required": ["NPLRatio", "provisionCoverageRatio"],
+              "properties": {
+                "NPLBalance": { "type": "number", "description": "不良贷款余额(亿元)" },
+                "NPLRatio": { "type": "number", "description": "不良贷款率(%)" },
+                "specialMentionLoanRatio": { "type": "number", "description": "关注类贷款占比(%)" },
+                "provisionCoverageRatio": { "type": "number", "description": "拨备覆盖率(%)" },
+                "loanProvisionRatio": { "type": "number", "description": "贷款拨备率(%)" }
+              }
+            },
+            "capitalAdequacy": {
+              "type": "object",
+              "required": ["coreTier1CAR", "tier1CAR", "CAR"],
+              "properties": {
+                "coreTier1CAR": { "type": "number", "description": "核心一级资本充足率(%)" },
+                "tier1CAR": { "type": "number", "description": "一级资本充足率(%)" },
+                "CAR": { "type": "number", "description": "资本充足率(%)" },
+                "leverageRatio": { "type": "number", "description": "杠杆率(%)" }
+              }
+            },
+            "liquidity": {
+              "type": "object",
+              "properties": {
+                "liquidityCoverageRatio": { "type": "number", "description": "流动性覆盖率(%)" },
+                "loanToDepositRatio": { "type": "number", "description": "存贷比(%)" },
+                "liquidityRatio": { "type": "number", "description": "流动性比例(%)" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "metadata": {
+      "type": "object",
+      "required": ["dataSource", "lastUpdated", "unitConvention"],
+      "properties": {
+        "dataSource": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "数据来源：年报、半年报、季报、监管披露等"
+        },
+        "lastUpdated": {
+          "type": "string",
+          "description": "数据最后更新时间"
+        },
+        "unitConvention": {
+          "type": "object",
+          "properties": {
+            "currency": { "type": "string", "const": "CNY" },
+            "amountUnit": { "type": "string", "const": "hundred_million_yuan" },
+            "ratioUnit": { "type": "string", "const": "percent" }
+          }
+        },
+        "notes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "备注说明"
+        }
+      }
+    }
+  }
+}

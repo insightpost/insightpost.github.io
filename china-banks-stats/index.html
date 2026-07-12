@@ -1,0 +1,1393 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>中国头部银行经营数据可视化平台</title>
+    <!-- 思源字体：使用系统字体优先，CDN为增强 -->
+    <link href="https://fonts.loli.net/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind 自定义配置（必须在加载tailwind.js之前） -->
+    <script>
+        tailwind = window.tailwind || {};
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            50: '#f0f4fa', 100: '#d9e2f0', 200: '#b3c5e1', 300: '#8da8d2', 400: '#678bc3',
+                            500: '#416eb4', 600: '#2c5494', 700: '#1f3d6b', 800: '#132642', 900: '#0a1528', 950: '#050b16'
+                        },
+                        gold: {
+                            50: '#fefce8', 100: '#fef9c3', 200: '#fef08a', 300: '#fde047', 400: '#facc15',
+                            500: '#eab308', 600: '#ca8a04', 700: '#a16207', 800: '#854d0e', 900: '#713f12'
+                        },
+                        steel: {
+                            50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1', 400: '#94a3b8',
+                            500: '#64748b', 600: '#475569', 700: '#334155', 800: '#1e293b', 900: '#0f172a'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Noto Serif SC', 'Songti SC', 'SimSun', 'STSong', 'Georgia', 'serif'],
+                        sans: ['Noto Sans SC', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', 'WenQuanYi Micro Hei', '-apple-system', 'BlinkMacSystemFont', 'Helvetica Neue', 'Arial', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto { content-visibility: auto; }
+            .glass-card { background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.2); }
+            .gradient-navy { background: linear-gradient(135deg, #0a1528 0%, #132642 50%, #1f3d6b 100%); }
+            .text-shadow { text-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+            .scrollbar-thin::-webkit-scrollbar { width: 6px; height: 6px; }
+            .scrollbar-thin::-webkit-scrollbar-track { background: #f1f5f9; border-radius: 3px; }
+            .scrollbar-thin::-webkit-scrollbar-thumb { background: #94a3b8; border-radius: 3px; }
+            .scrollbar-thin::-webkit-scrollbar-thumb:hover { background: #64748b; }
+            .tab-active { background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%); color: #0a1528; box-shadow: 0 4px 14px rgba(234, 179, 8, 0.4); }
+            .card-hover { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+            .card-hover:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            }
+            .fade-in { animation: fadeIn 0.5s ease-out forwards; }
+            @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+            .number-mono { font-variant-numeric: tabular-nums; font-feature-settings: "tnum"; }
+        }
+    </style>
+    
+    <!-- 全局基础样式兜底：确保字体始终可用 -->
+    <style>
+        body { font-family: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif; }
+        .font-serif, h1, h2, h3 { font-family: "Noto Serif SC", "Songti SC", "SimSun", "STSong", Georgia, serif; }
+    </style>
+</head>
+<body class="bg-steel-50 font-sans min-h-screen">
+    <!-- Header -->
+    <header class="gradient-navy text-white shadow-2xl sticky top-0 z-50">
+        <div class="max-w-[1600px] mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-gold-500 rounded-lg flex items-center justify-center shadow-lg">
+                        <svg class="w-7 h-7 text-navy-900" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L2 7v10l10 5 10-5V7L12 2zm0 2.18l6.9 3.45L12 11.09 5.1 7.63 12 4.18zM4 8.82l7 3.5v7.36l-7-3.5V8.82zm9 10.86v-7.36l7-3.5v7.36l-7 3.5z"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-serif font-bold text-shadow tracking-wide">中国头部银行经营数据平台</h1>
+                        <p class="text-navy-200 text-sm mt-0.5">2016-2025 · 28家银行 · 多维度经营数据分析</p>
+                    </div>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <div class="text-right hidden md:block">
+                        <div class="text-gold-400 text-sm font-medium">数据覆盖</div>
+                        <div class="text-white font-semibold">6大国有行 · 9家股份制 · 3家政策性 · 10家城商行</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="bg-white shadow-sm sticky top-[72px] z-40 border-b border-steel-200">
+        <div class="max-w-[1600px] mx-auto px-6">
+            <div class="flex space-x-1 py-2">
+                <button onclick="switchTab('raw')" id="tab-raw" class="tab-btn px-6 py-2.5 rounded-lg font-medium text-sm transition-all duration-300 tab-active">
+                    📊 原始数据
+                </button>
+                <button onclick="switchTab('compare')" id="tab-compare" class="tab-btn px-6 py-2.5 rounded-lg font-medium text-sm transition-all duration-300 text-steel-600 hover:bg-steel-100">
+                    📈 银行对比
+                </button>
+                <button onclick="switchTab('trend')" id="tab-trend" class="tab-btn px-6 py-2.5 rounded-lg font-medium text-sm transition-all duration-300 text-steel-600 hover:bg-steel-100">
+                    📉 趋势分析
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="max-w-[1600px] mx-auto px-6 py-6">
+        <!-- Loading State -->
+        <div id="loading" class="text-center py-20">
+            <div class="inline-block w-12 h-12 border-4 border-navy-200 border-t-navy-600 rounded-full animate-spin mb-4"></div>
+            <p class="text-steel-600">正在加载银行数据...</p>
+        </div>
+
+        <!-- Raw Data Panel -->
+        <section id="panel-raw" class="panel fade-in hidden">
+            <!-- Filter Bar -->
+            <div class="glass-card rounded-xl p-5 mb-6 shadow-lg card-hover">
+                <div class="flex flex-wrap items-center gap-4">
+                    <div class="flex items-center space-x-2">
+                        <span class="text-steel-500 text-sm font-medium">银行类型：</span>
+                        <div class="flex flex-wrap gap-2">
+                            <button onclick="filterBankType('all')" class="type-filter px-4 py-1.5 rounded-full text-sm font-medium bg-navy-800 text-white transition-all" data-type="all">全部</button>
+                            <button onclick="filterBankType('state_owned_large')" class="type-filter px-4 py-1.5 rounded-full text-sm font-medium bg-steel-100 text-steel-700 hover:bg-steel-200 transition-all" data-type="state_owned_large">国有大行</button>
+                            <button onclick="filterBankType('joint_stock')" class="type-filter px-4 py-1.5 rounded-full text-sm font-medium bg-steel-100 text-steel-700 hover:bg-steel-200 transition-all" data-type="joint_stock">股份制</button>
+                            <button onclick="filterBankType('policy_bank')" class="type-filter px-4 py-1.5 rounded-full text-sm font-medium bg-steel-100 text-steel-700 hover:bg-steel-200 transition-all" data-type="policy_bank">政策性</button>
+                            <button onclick="filterBankType('city_commercial')" class="type-filter px-4 py-1.5 rounded-full text-sm font-medium bg-steel-100 text-steel-700 hover:bg-steel-200 transition-all" data-type="city_commercial">城商行</button>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-2 ml-auto">
+                        <span class="text-steel-500 text-sm font-medium">年份：</span>
+                        <select id="yearSelect" onchange="filterByYear()" class="border border-steel-300 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none">
+                            <option value="all">全部年份</option>
+                        </select>
+                    </div>
+                    <div class="flex items-center space-x-2">
+                        <input type="text" id="searchBank" onkeyup="searchBankName()" placeholder="搜索银行名称..." class="border border-steel-300 rounded-lg px-4 py-1.5 text-sm w-52 focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                <div class="glass-card rounded-xl p-5 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-steel-500 text-sm">银行总数</p>
+                            <p class="text-3xl font-bold text-navy-800 mt-1 number-mono" id="stat-banks">28</p>
+                        </div>
+                        <div class="w-12 h-12 bg-navy-100 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-navy-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl p-5 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-steel-500 text-sm">总资产规模(2025)</p>
+                            <p class="text-3xl font-bold text-navy-800 mt-1 number-mono" id="stat-assets">--</p>
+                            <p class="text-xs text-steel-400">万亿元</p>
+                        </div>
+                        <div class="w-12 h-12 bg-gold-100 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-gold-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl p-5 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-steel-500 text-sm">平均ROE(2024)</p>
+                            <p class="text-3xl font-bold text-navy-800 mt-1 number-mono" id="stat-roe">--</p>
+                            <p class="text-xs text-steel-400">%</p>
+                        </div>
+                        <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl p-5 card-hover">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-steel-500 text-sm">平均不良率(2024)</p>
+                            <p class="text-3xl font-bold text-navy-800 mt-1 number-mono" id="stat-npl">--</p>
+                            <p class="text-xs text-steel-400">%</p>
+                        </div>
+                        <div class="w-12 h-12 bg-red-100 rounded-xl flex items-center justify-center">
+                            <svg class="w-6 h-6 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bank Cards Grid -->
+            <div id="bankGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                <!-- Bank cards will be inserted here -->
+            </div>
+
+            <!-- Data Table Modal -->
+            <div id="dataModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+                <div class="bg-white rounded-2xl shadow-2xl w-full max-w-6xl max-h-[90vh] overflow-hidden flex flex-col">
+                    <div class="gradient-navy px-6 py-4 flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-bold text-white" id="modalTitle">银行详情</h3>
+                            <p class="text-navy-200 text-sm" id="modalSubtitle"></p>
+                        </div>
+                        <button onclick="closeModal()" class="text-white/80 hover:text-white transition-colors">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="flex-1 overflow-auto scrollbar-thin p-6">
+                        <div id="modalContent"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Compare Panel -->
+        <section id="panel-compare" class="panel hidden">
+            <!-- Compare Controls -->
+            <div class="glass-card rounded-xl p-5 mb-6 shadow-lg">
+                <div class="flex flex-wrap items-start gap-6">
+                    <div class="flex-1 min-w-[300px]">
+                        <label class="block text-steel-500 text-sm font-medium mb-2">选择对比银行（可多选）</label>
+                        <div class="flex flex-wrap gap-2" id="compareBankSelector">
+                            <!-- Bank checkboxes will be inserted here -->
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-steel-500 text-sm font-medium mb-2">对比年份</label>
+                        <select id="compareYear" onchange="updateCompareCharts()" class="border border-steel-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none">
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4 flex flex-wrap gap-2">
+                    <span class="text-steel-500 text-sm font-medium mr-2">对比指标：</span>
+                    <button onclick="setCompareMetric('totalAssets')" class="metric-btn px-3 py-1 rounded-full text-xs font-medium bg-navy-800 text-white" data-metric="totalAssets">总资产</button>
+                    <button onclick="setCompareMetric('operatingRevenue')" class="metric-btn px-3 py-1 rounded-full text-xs font-medium bg-steel-100 text-steel-700 hover:bg-steel-200" data-metric="operatingRevenue">营业收入</button>
+                    <button onclick="setCompareMetric('netProfit')" class="metric-btn px-3 py-1 rounded-full text-xs font-medium bg-steel-100 text-steel-700 hover:bg-steel-200" data-metric="netProfit">净利润</button>
+                    <button onclick="setCompareMetric('ROE')" class="metric-btn px-3 py-1 rounded-full text-xs font-medium bg-steel-100 text-steel-700 hover:bg-steel-200" data-metric="ROE">ROE</button>
+                    <button onclick="setCompareMetric('ROA')" class="metric-btn px-3 py-1 rounded-full text-xs font-medium bg-steel-100 text-steel-700 hover:bg-steel-200" data-metric="ROA">ROA</button>
+                    <button onclick="setCompareMetric('NPLRatio')" class="metric-btn px-3 py-1 rounded-full text-xs font-medium bg-steel-100 text-steel-700 hover:bg-steel-200" data-metric="NPLRatio">不良率</button>
+                    <button onclick="setCompareMetric('CAR')" class="metric-btn px-3 py-1 rounded-full text-xs font-medium bg-steel-100 text-steel-700 hover:bg-steel-200" data-metric="CAR">资本充足率</button>
+                    <button onclick="setCompareMetric('provisionCoverageRatio')" class="metric-btn px-3 py-1 rounded-full text-xs font-medium bg-steel-100 text-steel-700 hover:bg-steel-200" data-metric="provisionCoverageRatio">拨备覆盖率</button>
+                </div>
+            </div>
+
+            <!-- Charts Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div class="glass-card rounded-xl p-6 shadow-lg card-hover">
+                    <h4 class="text-lg font-semibold text-navy-800 mb-4" id="barChartTitle">总资产对比（亿元）</h4>
+                    <div class="h-80">
+                        <canvas id="barChart"></canvas>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl p-6 shadow-lg card-hover">
+                    <h4 class="text-lg font-semibold text-navy-800 mb-4">盈利与风险指标雷达图</h4>
+                    <div class="h-80">
+                        <canvas id="radarChart"></canvas>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl p-6 shadow-lg card-hover lg:col-span-2">
+                    <h4 class="text-lg font-semibold text-navy-800 mb-4">核心指标对比表</h4>
+                    <div class="overflow-x-auto scrollbar-thin">
+                        <table class="w-full text-sm">
+                            <thead>
+                                <tr class="border-b border-steel-200">
+                                    <th class="text-left py-3 px-4 font-semibold text-steel-600">银行</th>
+                                    <th class="text-right py-3 px-4 font-semibold text-steel-600">总资产(亿)</th>
+                                    <th class="text-right py-3 px-4 font-semibold text-steel-600">营收(亿)</th>
+                                    <th class="text-right py-3 px-4 font-semibold text-steel-600">净利润(亿)</th>
+                                    <th class="text-right py-3 px-4 font-semibold text-steel-600">ROE(%)</th>
+                                    <th class="text-right py-3 px-4 font-semibold text-steel-600">ROA(%)</th>
+                                    <th class="text-right py-3 px-4 font-semibold text-steel-600">不良率(%)</th>
+                                    <th class="text-right py-3 px-4 font-semibold text-steel-600">拨备覆盖率(%)</th>
+                                    <th class="text-right py-3 px-4 font-semibold text-steel-600">资本充足率(%)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="compareTableBody">
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trend Panel -->
+        <section id="panel-trend" class="panel hidden">
+            <!-- Trend Controls -->
+            <div class="glass-card rounded-xl p-5 mb-6 shadow-lg">
+                <div class="flex flex-wrap items-center gap-6">
+                    <div>
+                        <label class="block text-steel-500 text-sm font-medium mb-2">选择银行（可多选）</label>
+                        <div class="flex flex-wrap gap-2 max-w-xl" id="trendBankSelector">
+                        </div>
+                    </div>
+                    <div class="ml-auto">
+                        <label class="block text-steel-500 text-sm font-medium mb-2">趋势指标</label>
+                        <select id="trendMetric" onchange="updateTrendCharts()" class="border border-steel-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-gold-400 focus:border-gold-400 outline-none">
+                            <option value="totalAssets">总资产</option>
+                            <option value="operatingRevenue">营业收入</option>
+                            <option value="netProfit">净利润</option>
+                            <option value="netInterestMargin">净息差</option>
+                            <option value="ROE">ROE</option>
+                            <option value="ROA">ROA</option>
+                            <option value="NPLRatio">不良贷款率</option>
+                            <option value="provisionCoverageRatio">拨备覆盖率</option>
+                            <option value="CAR">资本充足率</option>
+                            <option value="coreTier1CAR">核心一级资本充足率</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Trend Chart -->
+            <div class="glass-card rounded-xl p-6 shadow-lg mb-6 card-hover">
+                <h4 class="text-lg font-semibold text-navy-800 mb-4" id="trendChartTitle">总资产趋势（2016-2025）</h4>
+                <div class="h-[400px]">
+                    <canvas id="trendLineChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Additional Analysis Charts -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+                <div class="glass-card rounded-xl p-6 shadow-lg card-hover">
+                    <h4 class="text-lg font-semibold text-navy-800 mb-4">行业平均指标趋势</h4>
+                    <div class="h-72">
+                        <canvas id="industryAvgChart"></canvas>
+                    </div>
+                </div>
+                <div class="glass-card rounded-xl p-6 shadow-lg card-hover">
+                    <h4 class="text-lg font-semibold text-navy-800 mb-4">各类银行规模对比（2025年）</h4>
+                    <div class="h-72">
+                        <canvas id="typeScatterChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Observations -->
+            <div class="glass-card rounded-xl p-6 shadow-lg card-hover">
+                <h4 class="text-lg font-semibold text-navy-800 mb-4 flex items-center">
+                    <span class="w-8 h-8 bg-gold-500 rounded-lg flex items-center justify-center mr-3">
+                        <svg class="w-4 h-4 text-navy-900" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"/>
+                        </svg>
+                    </span>
+                    趋势洞察
+                </h4>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="trendInsights">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-navy-900 text-navy-300 py-8 mt-12">
+        <div class="max-w-[1600px] mx-auto px-6 text-center">
+            <p class="text-sm">中国头部银行经营数据可视化平台 · 数据来源：各银行公开年报</p>
+            <p class="text-xs text-navy-500 mt-2">仅供研究参考，不构成投资建议</p>
+        </div>
+    </footer>
+
+    <script>
+        // Global data store
+        let allBanksData = [];
+        let indexData = null;
+        let currentTypeFilter = 'all';
+        let currentYearFilter = 'all';
+        let currentSearch = '';
+        let compareMetric = 'totalAssets';
+        let selectedCompareBanks = ['ICBC', 'CCB', 'CMB', 'CIB', 'JSB'];
+        let selectedTrendBanks = ['ICBC', 'CCB', 'BOC', 'ABC', 'BOCOM', 'PSBC', 'CMB'];
+        let barChart, radarChart, trendLineChart, industryAvgChart, typeScatterChart;
+
+        // Color palette
+        const bankColors = [
+            '#1f3d6b', '#eab308', '#059669', '#dc2626', '#7c3aed',
+            '#0891b2', '#ea580c', '#be185d', '#0f766e', '#65a30d'
+        ];
+
+        const typeLabels = {
+            'state_owned_large': '国有大行',
+            'joint_stock': '股份制',
+            'policy_bank': '政策性',
+            'city_commercial': '城商行'
+        };
+
+        const metricLabels = {
+            'totalAssets': '总资产(亿元)',
+            'totalLoans': '贷款总额(亿元)',
+            'totalDeposits': '存款总额(亿元)',
+            'operatingRevenue': '营业收入(亿元)',
+            'netProfit': '净利润(亿元)',
+            'netProfitAttributableToParent': '归母净利润(亿元)',
+            'netInterestMargin': '净息差(%)',
+            'ROA': 'ROA(%)',
+            'ROE': 'ROE(%)',
+            'NPLRatio': '不良贷款率(%)',
+            'provisionCoverageRatio': '拨备覆盖率(%)',
+            'CAR': '资本充足率(%)',
+            'coreTier1CAR': '核心一级资本充足率(%)',
+            'costToIncomeRatio': '成本收入比(%)'
+        };
+
+        // Load data
+        async function loadData() {
+            try {
+                // Load index
+                const indexResponse = await fetch('index.json');
+                indexData = await indexResponse.json();
+
+                // Load all bank data
+                const loadPromises = [];
+                for (const [type, info] of Object.entries(indexData.coverage)) {
+                    for (const bank of info.banks) {
+                        loadPromises.push(
+                            fetch(bank.file).then(r => r.json()).then(data => {
+                                data._file = bank.file;
+                                return data;
+                            })
+                        );
+                    }
+                }
+
+                allBanksData = await Promise.all(loadPromises);
+
+                // Hide loading, show content
+                document.getElementById('loading').classList.add('hidden');
+                document.getElementById('panel-raw').classList.remove('hidden');
+
+                // Initialize UI
+                initializeUI();
+                updateStats();
+                renderBankGrid();
+                renderCompareSelectors();
+                renderTrendSelectors();
+                populateYearSelects();
+                updateCompareCharts();
+                updateTrendCharts();
+                generateInsights();
+            } catch (e) {
+                console.error('Error loading data:', e);
+                document.getElementById('loading').innerHTML = '<div class="text-center text-red-600 p-8"><p class="text-lg font-medium mb-2">数据加载失败</p><p class="text-sm text-steel-500">请确保通过HTTP服务器访问此页面，或使用dashboard.html单文件版本</p></div>';
+            }
+        }
+
+        function initializeUI() {
+            // Add any initialization logic
+        }
+
+        function populateYearSelects() {
+            const years = [];
+            for (let y = 2025; y >= 2016; y--) years.push(y.toString());
+            
+            const yearSelect = document.getElementById('yearSelect');
+            const compareYear = document.getElementById('compareYear');
+            
+            years.forEach(y => {
+                yearSelect.innerHTML += `<option value="${y}">${y}年</option>`;
+                compareYear.innerHTML += `<option value="${y}" ${y === '2024' ? 'selected' : ''}>${y}年</option>`;
+            });
+        }
+
+        function switchTab(tab) {
+            document.querySelectorAll('.panel').forEach(p => p.classList.add('hidden'));
+            document.querySelectorAll('.tab-btn').forEach(b => {
+                b.classList.remove('tab-active');
+                b.classList.add('text-steel-600', 'hover:bg-steel-100');
+            });
+            
+            document.getElementById(`panel-${tab}`).classList.remove('hidden');
+            document.getElementById(`panel-${tab}`).classList.add('fade-in');
+            document.getElementById(`tab-${tab}`).classList.add('tab-active');
+            document.getElementById(`tab-${tab}`).classList.remove('text-steel-600', 'hover:bg-steel-100');
+
+            // Resize charts when tab becomes visible
+            setTimeout(() => {
+                if (tab === 'compare') {
+                    if (barChart) barChart.resize();
+                    if (radarChart) radarChart.resize();
+                } else if (tab === 'trend') {
+                    if (trendLineChart) trendLineChart.resize();
+                    if (industryAvgChart) industryAvgChart.resize();
+                    if (typeScatterChart) typeScatterChart.resize();
+                }
+            }, 100);
+        }
+
+        function filterBankType(type) {
+            currentTypeFilter = type;
+            document.querySelectorAll('.type-filter').forEach(btn => {
+                if (btn.dataset.type === type) {
+                    btn.classList.remove('bg-steel-100', 'text-steel-700');
+                    btn.classList.add('bg-navy-800', 'text-white');
+                } else {
+                    btn.classList.add('bg-steel-100', 'text-steel-700');
+                    btn.classList.remove('bg-navy-800', 'text-white');
+                }
+            });
+            renderBankGrid();
+            updateStats();
+        }
+
+        function filterByYear() {
+            currentYearFilter = document.getElementById('yearSelect').value;
+            renderBankGrid();
+            updateStats();
+        }
+
+        function searchBankName() {
+            currentSearch = document.getElementById('searchBank').value.toLowerCase();
+            renderBankGrid();
+        }
+
+        function getFilteredBanks() {
+            return allBanksData.filter(bank => {
+                const matchesType = currentTypeFilter === 'all' || bank.bankInfo.bankType === currentTypeFilter;
+                const matchesSearch = !currentSearch || 
+                    bank.bankInfo.bankName.shortName.toLowerCase().includes(currentSearch) ||
+                    bank.bankInfo.bankName.chineseName.toLowerCase().includes(currentSearch);
+                
+                if (currentYearFilter === 'all') {
+                    return matchesType && matchesSearch;
+                }
+                return matchesType && matchesSearch && bank.annualData[currentYearFilter];
+            });
+        }
+
+        function getBankYearData(bank, year) {
+            if (year === 'all') {
+                // Get latest available year
+                const years = Object.keys(bank.annualData).sort().reverse();
+                return bank.annualData[years[0]] || {};
+            }
+            return bank.annualData[year] || bank.annualData['2024'] || {};
+        }
+
+        function getMetricValue(yearData, metric) {
+            if (!yearData) return null;
+            
+            const metricMap = {
+                'totalAssets': yearData.scale?.totalAssets,
+                'totalLoans': yearData.scale?.totalLoans,
+                'totalDeposits': yearData.scale?.totalDeposits,
+                'totalLiabilities': yearData.scale?.totalLiabilities,
+                'operatingRevenue': yearData.profitability?.operatingRevenue,
+                'netProfit': yearData.profitability?.netProfit,
+                'netProfitAttributableToParent': yearData.profitability?.netProfitAttributableToParent,
+                'netInterestMargin': yearData.profitability?.netInterestMargin,
+                'ROA': yearData.profitability?.ROA,
+                'ROE': yearData.profitability?.ROE,
+                'costToIncomeRatio': yearData.profitability?.costToIncomeRatio,
+                'NPLRatio': yearData.assetQuality?.NPLRatio,
+                'provisionCoverageRatio': yearData.assetQuality?.provisionCoverageRatio,
+                'NPLBalance': yearData.assetQuality?.NPLBalance,
+                'coreTier1CAR': yearData.capitalAdequacy?.coreTier1CAR,
+                'tier1CAR': yearData.capitalAdequacy?.tier1CAR,
+                'CAR': yearData.capitalAdequacy?.CAR
+            };
+            
+            return metricMap[metric] ?? null;
+        }
+
+        function updateStats() {
+            const filteredBanks = getFilteredBanks();
+            document.getElementById('stat-banks').textContent = filteredBanks.length;
+
+            const statYear = '2025' in Object.fromEntries(filteredBanks.flatMap(b => Object.keys(b.annualData).map(k => [k, true]))) ? '2025' : '2024';
+            
+            let totalAssets = 0;
+            let roeSum = 0, roeCount = 0;
+            let nplSum = 0, nplCount = 0;
+
+            filteredBanks.forEach(bank => {
+                const yd = bank.annualData[statYear] || bank.annualData['2024'];
+                if (yd) {
+                    const ta = getMetricValue(yd, 'totalAssets');
+                    if (ta) totalAssets += ta;
+                    
+                    const roe = getMetricValue(yd, 'ROE');
+                    if (roe) { roeSum += roe; roeCount++; }
+                    
+                    const npl = getMetricValue(yd, 'NPLRatio');
+                    if (npl) { nplSum += npl; nplCount++; }
+                }
+            });
+
+            document.getElementById('stat-assets').textContent = (totalAssets / 10000).toFixed(1);
+            document.getElementById('stat-roe').textContent = roeCount ? (roeSum / roeCount).toFixed(2) : '--';
+            document.getElementById('stat-npl').textContent = nplCount ? (nplSum / nplCount).toFixed(2) : '--';
+        }
+
+        function renderBankGrid() {
+            const grid = document.getElementById('bankGrid');
+            const filteredBanks = getFilteredBanks();
+            
+            grid.innerHTML = filteredBanks.map((bank, idx) => {
+                const yearData = getBankYearData(bank, currentYearFilter);
+                const latestYear = currentYearFilter === 'all' ? 
+                    Object.keys(bank.annualData).sort().reverse()[0] : currentYearFilter;
+                
+                const ta = getMetricValue(yearData, 'totalAssets');
+                const np = getMetricValue(yearData, 'netProfit');
+                const roe = getMetricValue(yearData, 'ROE');
+                const npl = getMetricValue(yearData, 'NPLRatio');
+                const car = getMetricValue(yearData, 'CAR');
+
+                const typeColors = {
+                    'state_owned_large': 'bg-red-100 text-red-700',
+                    'joint_stock': 'bg-blue-100 text-blue-700',
+                    'policy_bank': 'bg-purple-100 text-purple-700',
+                    'city_commercial': 'bg-green-100 text-green-700'
+                };
+
+                return `
+                    <div class="glass-card rounded-xl overflow-hidden shadow-md card-hover cursor-pointer fade-in" 
+                         style="animation-delay: ${idx * 30}ms"
+                         onclick="showBankDetail('${bank.bankInfo.bankId}')">
+                        <div class="p-5">
+                            <div class="flex items-start justify-between mb-4">
+                                <div>
+                                    <span class="inline-block px-2 py-0.5 rounded-full text-xs font-medium ${typeColors[bank.bankInfo.bankType]} mb-2">
+                                        ${typeLabels[bank.bankInfo.bankType]}
+                                    </span>
+                                    <h3 class="text-lg font-bold text-navy-900">${bank.bankInfo.bankName.shortName}</h3>
+                                    ${bank.bankInfo.listingInfo?.aShareCode ? 
+                                        `<p class="text-xs text-steel-400 mt-0.5">${bank.bankInfo.listingInfo.aShareCode}</p>` : ''}
+                                </div>
+                                <div class="w-10 h-10 bg-navy-800 rounded-lg flex items-center justify-center text-gold-400 font-bold text-sm">
+                                    ${bank.bankInfo.bankId.substring(0, 3)}
+                                </div>
+                            </div>
+                            
+                            <div class="space-y-2.5">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-steel-500 text-sm">总资产</span>
+                                    <span class="font-semibold text-navy-800 number-mono">${ta ? (ta / 10000).toFixed(2) + '万亿' : '--'}</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-steel-500 text-sm">净利润</span>
+                                    <span class="font-semibold text-navy-800 number-mono">${np ? np.toFixed(1) + '亿' : '--'}</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-steel-500 text-sm">ROE</span>
+                                    <span class="font-semibold ${roe >= 12 ? 'text-green-600' : roe >= 8 ? 'text-gold-600' : 'text-red-600'} number-mono">${roe ? roe.toFixed(2) + '%' : '--'}</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-steel-500 text-sm">不良率</span>
+                                    <span class="font-semibold ${npl <= 1.2 ? 'text-green-600' : npl <= 1.5 ? 'text-gold-600' : 'text-red-600'} number-mono">${npl ? npl.toFixed(2) + '%' : '--'}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-steel-50 px-5 py-2.5 border-t border-steel-100 flex justify-between items-center">
+                            <span class="text-xs text-steel-400">数据年份：${latestYear || '--'}</span>
+                            <span class="text-xs text-gold-600 font-medium flex items-center">
+                                查看详情
+                                <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+                                </svg>
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function showBankDetail(bankId) {
+            const bank = allBanksData.find(b => b.bankInfo.bankId === bankId);
+            if (!bank) return;
+
+            document.getElementById('modalTitle').textContent = bank.bankInfo.bankName.chineseName;
+            document.getElementById('modalSubtitle').textContent = 
+                `${typeLabels[bank.bankInfo.bankType]} · ${bank.bankInfo.headquarters.city} · 成立于${bank.bankInfo.establishmentDate}`;
+
+            const years = Object.keys(bank.annualData).sort();
+            
+            let tableHtml = `
+                <div class="mb-4">
+                    <p class="text-steel-500 text-sm mb-2">
+                        ${bank.bankInfo.listingInfo?.isListed ? `上市代码：${bank.bankInfo.listingInfo.aShareCode || ''} ${bank.bankInfo.listingInfo.hShareCode || ''}` : '非上市银行'}
+                    </p>
+                </div>
+                <div class="overflow-x-auto scrollbar-thin">
+                    <table class="w-full text-sm border-collapse">
+                        <thead>
+                            <tr class="bg-navy-800 text-white">
+                                <th class="py-3 px-3 text-left font-semibold sticky left-0 bg-navy-800 z-10">指标</th>
+                                ${years.map(y => `<th class="py-3 px-3 text-center font-semibold">${y}</th>`).join('')}
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            const metricsToShow = [
+                { group: '规模指标', items: [
+                    ['totalAssets', '总资产(亿元)'],
+                    ['totalLoans', '贷款总额(亿元)'],
+                    ['totalDeposits', '存款总额(亿元)'],
+                ]},
+                { group: '盈利指标', items: [
+                    ['operatingRevenue', '营业收入(亿元)'],
+                    ['netProfit', '净利润(亿元)'],
+                    ['netInterestMargin', '净息差(%)'],
+                    ['ROA', 'ROA(%)'],
+                    ['ROE', 'ROE(%)'],
+                ]},
+                { group: '资产质量', items: [
+                    ['NPLRatio', '不良率(%)'],
+                    ['provisionCoverageRatio', '拨备覆盖率(%)'],
+                ]},
+                { group: '资本充足', items: [
+                    ['coreTier1CAR', '核心一级(%)'],
+                    ['CAR', '资本充足率(%)'],
+                ]}
+            ];
+
+            metricsToShow.forEach(group => {
+                tableHtml += `<tr class="bg-gold-50"><td colspan="${years.length + 1}" class="py-2 px-3 font-semibold text-navy-800 text-sm">${group.group}</td></tr>`;
+                group.items.forEach(([metric, label]) => {
+                    tableHtml += `<tr class="border-b border-steel-100 hover:bg-steel-50">
+                        <td class="py-2 px-3 text-steel-600 sticky left-0 bg-white z-10">${label}</td>
+                        ${years.map(y => {
+                            const val = getMetricValue(bank.annualData[y], metric);
+                            return `<td class="py-2 px-3 text-center number-mono ${val === null ? 'text-steel-300' : 'text-navy-800'}">${val !== null ? (typeof val === 'number' ? val.toFixed(2) : val) : '-'}</td>`;
+                        }).join('')}
+                    </tr>`;
+                });
+            });
+
+            tableHtml += '</tbody></table></div>';
+
+            // Add notes if any
+            if (bank.metadata?.notes?.length > 0) {
+                tableHtml += `
+                    <div class="mt-4 p-4 bg-amber-50 rounded-lg border border-amber-200">
+                        <p class="text-amber-800 font-medium text-sm mb-2">📝 数据说明</p>
+                        <ul class="text-amber-700 text-xs space-y-1">
+                            ${bank.metadata.notes.map(n => `<li>${n.year}年：${n.note}</li>`).join('')}
+                        </ul>
+                    </div>
+                `;
+            }
+
+            document.getElementById('modalContent').innerHTML = tableHtml;
+            document.getElementById('dataModal').classList.remove('hidden');
+            document.getElementById('dataModal').classList.add('flex');
+        }
+
+        function closeModal() {
+            document.getElementById('dataModal').classList.add('hidden');
+            document.getElementById('dataModal').classList.remove('flex');
+        }
+
+        // Compare functions
+        function renderCompareSelectors() {
+            const container = document.getElementById('compareBankSelector');
+            const defaultSelected = ['ICBC', 'CCB', 'CMB', 'CIB', 'JSB'];
+            
+            const banksByType = {};
+            allBanksData.forEach(bank => {
+                const t = bank.bankInfo.bankType;
+                if (!banksByType[t]) banksByType[t] = [];
+                banksByType[t].push(bank);
+            });
+
+            let html = '';
+            for (const [type, banks] of Object.entries(banksByType)) {
+                html += `<div class="w-full mb-2">
+                    <span class="text-xs text-steel-400 mr-2">${typeLabels[type]}:</span>
+                    ${banks.map(bank => `
+                        <label class="inline-flex items-center mr-2 mb-1 cursor-pointer">
+                            <input type="checkbox" value="${bank.bankInfo.bankId}" 
+                                   ${defaultSelected.includes(bank.bankInfo.bankId) ? 'checked' : ''}
+                                   onchange="toggleCompareBank('${bank.bankInfo.bankId}')"
+                                   class="w-3.5 h-3.5 text-navy-800 rounded focus:ring-gold-400">
+                            <span class="ml-1 text-sm text-steel-700">${bank.bankInfo.bankName.shortName}</span>
+                        </label>
+                    `).join('')}
+                </div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function toggleCompareBank(bankId) {
+            const idx = selectedCompareBanks.indexOf(bankId);
+            if (idx > -1) {
+                selectedCompareBanks.splice(idx, 1);
+            } else {
+                selectedCompareBanks.push(bankId);
+            }
+            updateCompareCharts();
+        }
+
+        function setCompareMetric(metric) {
+            compareMetric = metric;
+            document.querySelectorAll('.metric-btn').forEach(btn => {
+                if (btn.dataset.metric === metric) {
+                    btn.classList.remove('bg-steel-100', 'text-steel-700');
+                    btn.classList.add('bg-navy-800', 'text-white');
+                } else {
+                    btn.classList.add('bg-steel-100', 'text-steel-700');
+                    btn.classList.remove('bg-navy-800', 'text-white');
+                }
+            });
+            updateCompareCharts();
+        }
+
+        function updateCompareCharts() {
+            const year = document.getElementById('compareYear').value;
+            const banks = selectedCompareBanks.map(id => allBanksData.find(b => b.bankInfo.bankId === id)).filter(Boolean);
+            
+            // 清空表格
+            document.getElementById('compareTableBody').innerHTML = banks.length === 0 ? 
+                '<tr><td colspan="9" class="py-8 text-center text-steel-400">请选择银行进行对比</td></tr>' : '';
+            
+            if (banks.length === 0) {
+                // 清空图表
+                if (barChart) { barChart.destroy(); barChart = null; }
+                if (radarChart) { radarChart.destroy(); radarChart = null; }
+                
+                // 绘制空状态提示
+                const barCtx = document.getElementById('barChart').getContext('2d');
+                const radarCtx = document.getElementById('radarChart').getContext('2d');
+                barCtx.clearRect(0, 0, barCtx.canvas.width, barCtx.canvas.height);
+                radarCtx.clearRect(0, 0, radarCtx.canvas.width, radarCtx.canvas.height);
+                barCtx.font = '16px "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif';
+                barCtx.fillStyle = '#94a3b8';
+                barCtx.textAlign = 'center';
+                barCtx.fillText('请选择银行进行对比', barCtx.canvas.width / 2, barCtx.canvas.height / 2);
+                radarCtx.font = '16px "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif';
+                radarCtx.fillStyle = '#94a3b8';
+                radarCtx.textAlign = 'center';
+                radarCtx.fillText('请选择银行进行对比', radarCtx.canvas.width / 2, radarCtx.canvas.height / 2);
+                
+                document.getElementById('barChartTitle').textContent = '请选择银行进行对比';
+                return;
+            }
+
+            // Bar Chart
+            const barCtx = document.getElementById('barChart').getContext('2d');
+            barCtx.clearRect(0, 0, barCtx.canvas.width, barCtx.canvas.height);
+            const barLabels = banks.map(b => b.bankInfo.bankName.shortName);
+            const barValues = banks.map(b => getMetricValue(b.annualData[year] || b.annualData['2024'], compareMetric) || 0);
+            
+            document.getElementById('barChartTitle').textContent = `${metricLabels[compareMetric]}对比（${year}年）`;
+
+            if (barChart) barChart.destroy();
+            barChart = new Chart(barCtx, {
+                type: 'bar',
+                data: {
+                    labels: barLabels,
+                    datasets: [{
+                        label: metricLabels[compareMetric],
+                        data: barValues,
+                        backgroundColor: banks.map((_, i) => bankColors[i % bankColors.length] + 'cc'),
+                        borderColor: banks.map((_, i) => bankColors[i % bankColors.length]),
+                        borderWidth: 2,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: '#e2e8f0' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+
+            // Radar Chart
+            const radarCtx = document.getElementById('radarChart').getContext('2d');
+            const radarMetrics = ['ROE', 'ROA', 'NPLRatio', 'CAR', 'provisionCoverageRatio', 'netInterestMargin'];
+            const radarLabels = ['ROE', 'ROA', '不良率↓', '资本充足率', '拨备覆盖率', '净息差'];
+            
+            // Normalize values for radar (0-100 scale, higher is better)
+            const radarDatasets = banks.map((bank, i) => {
+                const yd = bank.annualData[year] || bank.annualData['2024'];
+                return {
+                    label: bank.bankInfo.bankName.shortName,
+                    data: radarMetrics.map(m => {
+                        let val = getMetricValue(yd, m) || 0;
+                        // Invert NPL so higher is better
+                        if (m === 'NPLRatio') val = Math.max(0, 3 - val) / 3 * 100;
+                        else if (m === 'ROE') val = Math.min(val / 20 * 100, 100);
+                        else if (m === 'ROA') val = Math.min(val / 1.5 * 100, 100);
+                        else if (m === 'CAR') val = Math.min((val - 8) / 8 * 100, 100);
+                        else if (m === 'provisionCoverageRatio') val = Math.min(val / 400 * 100, 100);
+                        else if (m === 'netInterestMargin') val = Math.min(val / 3 * 100, 100);
+                        return Math.max(0, Math.min(100, val));
+                    }),
+                    backgroundColor: bankColors[i % bankColors.length] + '33',
+                    borderColor: bankColors[i % bankColors.length],
+                    borderWidth: 2,
+                    pointBackgroundColor: bankColors[i % bankColors.length]
+                };
+            });
+
+            if (radarChart) radarChart.destroy();
+            radarChart = new Chart(radarCtx, {
+                type: 'radar',
+                data: {
+                    labels: radarLabels,
+                    datasets: radarDatasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { boxWidth: 12, padding: 15 }
+                        }
+                    },
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { display: false },
+                            grid: { color: '#e2e8f0' }
+                        }
+                    }
+                }
+            });
+
+            // Comparison Table
+            const tbody = document.getElementById('compareTableBody');
+            tbody.innerHTML = banks.map((bank, i) => {
+                const yd = bank.annualData[year] || bank.annualData['2024'];
+                const getVal = (m) => {
+                    const v = getMetricValue(yd, m);
+                    return v !== null ? (typeof v === 'number' ? v.toFixed(2) : v) : '-';
+                };
+                return `
+                    <tr class="border-b border-steel-100 hover:bg-steel-50">
+                        <td class="py-3 px-4 font-medium text-navy-800">
+                            <span class="inline-block w-3 h-3 rounded-full mr-2" style="background: ${bankColors[i % bankColors.length]}"></span>
+                            ${bank.bankInfo.bankName.shortName}
+                        </td>
+                        <td class="py-3 px-4 text-right number-mono">${getVal('totalAssets')}</td>
+                        <td class="py-3 px-4 text-right number-mono">${getVal('operatingRevenue')}</td>
+                        <td class="py-3 px-4 text-right number-mono">${getVal('netProfit')}</td>
+                        <td class="py-3 px-4 text-right number-mono font-medium ${parseFloat(getVal('ROE')) >= 12 ? 'text-green-600' : ''}">${getVal('ROE')}</td>
+                        <td class="py-3 px-4 text-right number-mono">${getVal('ROA')}</td>
+                        <td class="py-3 px-4 text-right number-mono ${parseFloat(getVal('NPLRatio')) <= 1.2 ? 'text-green-600' : parseFloat(getVal('NPLRatio')) > 1.5 ? 'text-red-600' : ''}">${getVal('NPLRatio')}</td>
+                        <td class="py-3 px-4 text-right number-mono">${getVal('provisionCoverageRatio')}</td>
+                        <td class="py-3 px-4 text-right number-mono">${getVal('CAR')}</td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        // Trend functions
+        function renderTrendSelectors() {
+            const container = document.getElementById('trendBankSelector');
+            const defaultSelected = ['ICBC', 'CCB', 'BOC', 'ABC', 'BOCOM', 'PSBC', 'CMB'];
+            const banksByType = {};
+            allBanksData.forEach(bank => {
+                if (bank.bankInfo.bankType === 'policy_bank') return; // Skip policy banks for trends
+                const t = bank.bankInfo.bankType;
+                if (!banksByType[t]) banksByType[t] = [];
+                banksByType[t].push(bank);
+            });
+
+            let html = '';
+            for (const [type, banks] of Object.entries(banksByType)) {
+                html += `<div class="w-full mb-2">
+                    <span class="text-xs text-steel-400 mr-2">${typeLabels[type]}:</span>
+                    ${banks.map(bank => `
+                        <label class="inline-flex items-center mr-2 mb-1 cursor-pointer">
+                            <input type="checkbox" value="${bank.bankInfo.bankId}" 
+                                   ${defaultSelected.includes(bank.bankInfo.bankId) ? 'checked' : ''}
+                                   onchange="toggleTrendBank('${bank.bankInfo.bankId}')"
+                                   class="w-3.5 h-3.5 text-gold-600 rounded focus:ring-gold-400">
+                            <span class="ml-1 text-sm text-steel-700">${bank.bankInfo.bankName.shortName}</span>
+                        </label>
+                    `).join('')}
+                </div>`;
+            }
+            container.innerHTML = html;
+        }
+
+        function toggleTrendBank(bankId) {
+            const idx = selectedTrendBanks.indexOf(bankId);
+            if (idx > -1) {
+                selectedTrendBanks.splice(idx, 1);
+            } else {
+                selectedTrendBanks.push(bankId);
+            }
+            updateTrendCharts();
+        }
+
+        function updateTrendCharts() {
+            const metric = document.getElementById('trendMetric').value;
+            const years = ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'];
+            
+            document.getElementById('trendChartTitle').textContent = `${metricLabels[metric]}趋势（2016-2025）`;
+            
+            const banks = selectedTrendBanks.map(id => allBanksData.find(b => b.bankInfo.bankId === id)).filter(Boolean);
+            
+            if (banks.length === 0) {
+                // 只清空主趋势对比图，行业平均图和散点图是全行业数据，继续渲染
+                if (trendLineChart) { trendLineChart.destroy(); trendLineChart = null; }
+                
+                const lineCtx = document.getElementById('trendLineChart').getContext('2d');
+                lineCtx.clearRect(0, 0, lineCtx.canvas.width, lineCtx.canvas.height);
+                lineCtx.font = '16px "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif';
+                lineCtx.fillStyle = '#94a3b8';
+                lineCtx.textAlign = 'center';
+                lineCtx.fillText('请选择银行查看趋势对比', lineCtx.canvas.width / 2, lineCtx.canvas.height / 2);
+                document.getElementById('trendChartTitle').textContent = '请选择银行查看趋势对比';
+                
+                // 行业平均图和散点图继续渲染
+            } else {
+                document.getElementById('trendChartTitle').textContent = `${metricLabels[metric]}趋势（2016-2025）`;
+            }
+            
+            // 主趋势对比图 - 仅在选择银行时渲染
+            if (banks.length > 0) {
+                const lineCtx = document.getElementById('trendLineChart').getContext('2d');
+                lineCtx.clearRect(0, 0, lineCtx.canvas.width, lineCtx.canvas.height);
+                const lineDatasets = banks.map((bank, i) => ({
+                    label: bank.bankInfo.bankName.shortName,
+                    data: years.map(y => getMetricValue(bank.annualData[y], metric)),
+                    borderColor: bankColors[i % bankColors.length],
+                    backgroundColor: bankColors[i % bankColors.length] + '20',
+                    borderWidth: 2.5,
+                    pointRadius: 4,
+                    pointHoverRadius: 6,
+                    tension: 0.3,
+                    fill: false
+                }));
+
+                if (trendLineChart) trendLineChart.destroy();
+                trendLineChart = new Chart(lineCtx, {
+                    type: 'line',
+                    data: {
+                        labels: years,
+                        datasets: lineDatasets
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        interaction: {
+                            mode: 'index',
+                            intersect: false
+                        },
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: { boxWidth: 12, padding: 15, usePointStyle: true }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(10, 21, 40, 0.9)',
+                                padding: 12,
+                                titleFont: { size: 14, weight: 'bold' },
+                                bodyFont: { size: 13 },
+                                callbacks: {
+                                    label: function(context) {
+                                        let label = context.dataset.label || '';
+                                        if (label) label += ': ';
+                                        if (context.parsed.y !== null) {
+                                            label += context.parsed.y.toFixed(2);
+                                        }
+                                        return label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                beginAtZero: false,
+                                grid: { color: '#f1f5f9' },
+                                ticks: { font: { size: 11 } }
+                            },
+                            x: {
+                                grid: { display: false },
+                                ticks: { font: { size: 11 } }
+                            }
+                        }
+                    }
+                });
+            }
+
+            // Industry Average Chart (ROE, NPL, NIM trends) - 全行业数据，始终显示
+            const avgCtx = document.getElementById('industryAvgChart').getContext('2d');
+            const commercialBanks = allBanksData.filter(b => b.bankInfo.bankType !== 'policy_bank');
+            
+            const avgByYear = {};
+            years.forEach(y => {
+                let roeSum = 0, roeN = 0, nplSum = 0, nplN = 0, nimSum = 0, nimN = 0;
+                commercialBanks.forEach(bank => {
+                    const yd = bank.annualData[y];
+                    if (yd) {
+                        const roe = getMetricValue(yd, 'ROE');
+                        if (roe) { roeSum += roe; roeN++; }
+                        const npl = getMetricValue(yd, 'NPLRatio');
+                        if (npl) { nplSum += npl; nplN++; }
+                        const nim = getMetricValue(yd, 'netInterestMargin');
+                        if (nim) { nimSum += nim; nimN++; }
+                    }
+                });
+                avgByYear[y] = {
+                    roe: roeN ? roeSum / roeN : null,
+                    npl: nplN ? nplSum / nplN : null,
+                    nim: nimN ? nimSum / nimN : null
+                };
+            });
+
+            if (industryAvgChart) industryAvgChart.destroy();
+            industryAvgChart = new Chart(avgCtx, {
+                type: 'line',
+                data: {
+                    labels: years,
+                    datasets: [
+                        {
+                            label: '行业平均ROE(%)',
+                            data: years.map(y => avgByYear[y].roe),
+                            borderColor: '#059669',
+                            backgroundColor: '#05966920',
+                            borderWidth: 2.5,
+                            yAxisID: 'y',
+                            tension: 0.3
+                        },
+                        {
+                            label: '行业平均不良率(%)',
+                            data: years.map(y => avgByYear[y].npl),
+                            borderColor: '#dc2626',
+                            backgroundColor: '#dc262620',
+                            borderWidth: 2.5,
+                            yAxisID: 'y1',
+                            tension: 0.3
+                        },
+                        {
+                            label: '行业平均净息差(%)',
+                            data: years.map(y => avgByYear[y].nim),
+                            borderColor: '#7c3aed',
+                            backgroundColor: '#7c3aed20',
+                            borderWidth: 2.5,
+                            yAxisID: 'y',
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, padding: 10, font: { size: 11 } } }
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            position: 'left',
+                            grid: { color: '#f1f5f9' },
+                            ticks: { font: { size: 10 } }
+                        },
+                        y1: {
+                            type: 'linear',
+                            position: 'right',
+                            grid: { drawOnChartArea: false },
+                            ticks: { font: { size: 10 } }
+                        },
+                        x: { grid: { display: false }, ticks: { font: { size: 10 } } }
+                    }
+                }
+            });
+
+            // Type Scatter Chart (2025 Assets vs Profit)
+            const scatterCtx = document.getElementById('typeScatterChart').getContext('2d');
+            const scatterYear = '2024';
+            const typeColorMap = {
+                'state_owned_large': '#dc2626',
+                'joint_stock': '#2563eb',
+                'city_commercial': '#059669'
+            };
+            
+            const scatterDatasets = Object.entries(typeColorMap).map(([type, color]) => ({
+                label: typeLabels[type],
+                data: commercialBanks
+                    .filter(b => b.bankInfo.bankType === type)
+                    .map(b => {
+                        const yd = b.annualData[scatterYear] || b.annualData['2024'];
+                        return {
+                            x: getMetricValue(yd, 'totalAssets'),
+                            y: getMetricValue(yd, 'netProfit'),
+                            label: b.bankInfo.bankName.shortName
+                        };
+                    })
+                    .filter(d => d.x && d.y),
+                backgroundColor: color + 'aa',
+                borderColor: color,
+                borderWidth: 2,
+                pointRadius: 8,
+                pointHoverRadius: 10
+            }));
+
+            if (typeScatterChart) typeScatterChart.destroy();
+            typeScatterChart = new Chart(scatterCtx, {
+                type: 'scatter',
+                data: { datasets: scatterDatasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { position: 'bottom', labels: { boxWidth: 12, padding: 10 } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(ctx) {
+                                    return `${ctx.raw.label}: 资产${(ctx.raw.x/10000).toFixed(1)}万亿, 利润${ctx.raw.y.toFixed(0)}亿`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            title: { display: true, text: '总资产（亿元）', font: { size: 11 } },
+                            grid: { color: '#f1f5f9' }
+                        },
+                        y: {
+                            title: { display: true, text: '净利润（亿元）', font: { size: 11 } },
+                            grid: { color: '#f1f5f9' }
+                        }
+                    }
+                }
+            });
+
+            generateInsights();
+        }
+
+        function generateInsights() {
+            const insights = [];
+            const years = ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'];
+            
+            // 1. Scale growth
+            const icbc = allBanksData.find(b => b.bankInfo.bankId === 'ICBC');
+            if (icbc) {
+                const ta2016 = getMetricValue(icbc.annualData['2016'], 'totalAssets');
+                const ta2024 = getMetricValue(icbc.annualData['2024'], 'totalAssets');
+                if (ta2016 && ta2024) {
+                    const cagr = (Math.pow(ta2024 / ta2016, 1/8) - 1) * 100;
+                    insights.push({
+                        icon: '📈',
+                        title: '资产规模扩张',
+                        text: `工商银行总资产从2016年的${(ta2016/10000).toFixed(1)}万亿增长至2024年的${(ta2024/10000).toFixed(1)}万亿，年均复合增长率${cagr.toFixed(1)}%。`
+                    });
+                }
+            }
+
+            // 2. NIM trend
+            const commercialBanks = allBanksData.filter(b => b.bankInfo.bankType !== 'policy_bank');
+            let nim2016 = 0, nimN16 = 0, nim2024 = 0, nimN24 = 0;
+            commercialBanks.forEach(b => {
+                const n16 = getMetricValue(b.annualData['2016'], 'netInterestMargin');
+                const n24 = getMetricValue(b.annualData['2024'], 'netInterestMargin');
+                if (n16) { nim2016 += n16; nimN16++; }
+                if (n24) { nim2024 += n24; nimN24++; }
+            });
+            if (nimN16 && nimN24) {
+                const nimDrop = nim2016/nimN16 - nim2024/nimN24;
+                insights.push({
+                    icon: '📉',
+                    title: '净息差持续收窄',
+                    text: `商业银行平均净息差从2016年的${(nim2016/nimN16).toFixed(2)}%下降至2024年的${(nim2024/nimN24).toFixed(2)}%，累计收窄${nimDrop.toFixed(2)}个百分点，行业面临利率市场化压力。`
+                });
+            }
+
+            // 3. NPL trend
+            let npl2020 = 0, nplN20 = 0, npl2024 = 0, nplN24 = 0;
+            commercialBanks.forEach(b => {
+                const n20 = getMetricValue(b.annualData['2020'], 'NPLRatio');
+                const n24 = getMetricValue(b.annualData['2024'], 'NPLRatio');
+                if (n20) { npl2020 += n20; nplN20++; }
+                if (n24) { npl2024 += n24; nplN24++; }
+            });
+            if (nplN20 && nplN24) {
+                const nplChange = npl2024/nplN24 - npl2020/nplN20;
+                insights.push({
+                    icon: '🛡️',
+                    title: '资产质量改善',
+                    text: `行业平均不良率从2020年高点${(npl2020/nplN20).toFixed(2)}%${nplChange < 0 ? '回落至' : '上升至'}2024年的${(npl2024/nplN24).toFixed(2)}%，${nplChange < 0 ? '风险整体可控' : '需关注信用风险压力'}。`
+                });
+            }
+
+            // 4. City commercial bank performance
+            const jsb = allBanksData.find(b => b.bankInfo.bankId === 'JSB');
+            if (jsb) {
+                const roe2024 = getMetricValue(jsb.annualData['2024'], 'ROE');
+                const np2024 = getMetricValue(jsb.annualData['2024'], 'netProfit');
+                if (roe2024) {
+                    insights.push({
+                        icon: '⭐',
+                        title: '城商行龙头崛起',
+                        text: `江苏银行2024年ROE达${roe2024.toFixed(2)}%${np2024 ? `，净利润${np2024.toFixed(0)}亿元` : ''}，盈利能力在上市银行中表现突出，展现了优质城商行的成长潜力。`
+                    });
+                }
+            }
+
+            // 5. CMB performance
+            const cmb = allBanksData.find(b => b.bankInfo.bankId === 'CMB');
+            if (cmb) {
+                const pcr2024 = getMetricValue(cmb.annualData['2024'], 'provisionCoverageRatio');
+                const roe2024 = getMetricValue(cmb.annualData['2024'], 'ROE');
+                if (pcr2024) {
+                    insights.push({
+                        icon: '🏦',
+                        title: '招商银行标杆地位',
+                        text: `招商银行2024年拨备覆盖率${pcr2024.toFixed(0)}%${roe2024 ? `，ROE${roe2024.toFixed(2)}%` : ''}，零售银行优势明显，资产质量与风险抵御能力行业领先。`
+                    });
+                }
+            }
+
+            document.getElementById('trendInsights').innerHTML = insights.map(ins => `
+                <div class="bg-steel-50 rounded-xl p-4 border border-steel-200">
+                    <div class="flex items-start">
+                        <span class="text-2xl mr-3">${ins.icon}</span>
+                        <div>
+                            <h5 class="font-semibold text-navy-800 mb-1">${ins.title}</h5>
+                            <p class="text-sm text-steel-600 leading-relaxed">${ins.text}</p>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Close modal on outside click
+        document.getElementById('dataModal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        // Initialize after all dependencies loaded
+        function initApp() {
+            if (typeof Chart === 'undefined') {
+                console.error('Chart.js failed to load, retrying...');
+                setTimeout(initApp, 100);
+                return;
+            }
+            loadData();
+        }
+
+        // Load Chart.js (jsdelivr国内有镜像节点，优先使用，备用unpkg)
+        const chartScript = document.createElement('script');
+        chartScript.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js';
+        chartScript.onload = initApp;
+        chartScript.onerror = function() {
+            // Fallback to unpkg
+            const fallback = document.createElement('script');
+            fallback.src = 'https://unpkg.com/chart.js@4.4.8/dist/chart.umd.min.js';
+            fallback.onload = initApp;
+            fallback.onerror = function() {
+                // Last fallback: cdnjs
+                const lastFallback = document.createElement('script');
+                lastFallback.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.8/chart.umd.min.js';
+                lastFallback.onload = initApp;
+                lastFallback.onerror = function() {
+                    document.getElementById('loading').innerHTML = '<div class="text-center text-red-600 p-8"><p class="text-lg font-medium mb-2">图表库加载失败</p><p class="text-sm text-steel-500">请检查网络连接后刷新页面，或使用dashboard.html离线版本</p></div>';
+                };
+                document.body.appendChild(lastFallback);
+            };
+            document.body.appendChild(fallback);
+        };
+        document.body.appendChild(chartScript);
+    </script>
+</body>
+</html>

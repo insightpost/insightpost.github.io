@@ -1,0 +1,279 @@
+{
+  "schemaVersion": "1.0.0",
+  "bankInfo": {
+    "bankId": "HZB",
+    "bankName": {
+      "chineseName": "杭州银行股份有限公司",
+      "englishName": "Bank of Hangzhou Co., Ltd.",
+      "shortName": "杭州银行"
+    },
+    "bankType": "city_commercial",
+    "establishmentDate": "1996-09-26",
+    "headquarters": {
+      "province": "浙江省",
+      "city": "杭州市"
+    },
+    "listingInfo": {
+      "isListed": true,
+      "aShareCode": "600926.SH",
+      "hShareCode": null
+    }
+  },
+  "annualData": {
+    "2016": {
+      "scale": {
+        "totalAssets": 7204.0,
+        "totalLoans": 2466.58,
+        "totalDeposits": 3966.25
+      },
+      "profitability": {
+        "operatingRevenue": 137.29,
+        "netProfit": 46.36,
+        "ROA": 0.67,
+        "ROE": 12.38,
+        "netProfitAttributableToParent": 46.36,
+        "netInterestMargin": 1.98,
+        "costToIncomeRatio": 30.56
+      },
+      "assetQuality": {
+        "NPLRatio": 1.62,
+        "provisionCoverageRatio": 196.56
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 9.75,
+        "CAR": 12.23
+      }
+    },
+    "2017": {
+      "scale": {
+        "totalAssets": 8333.0,
+        "totalLoans": 2844.58,
+        "totalDeposits": 4486.38
+      },
+      "profitability": {
+        "operatingRevenue": 140.65,
+        "netProfit": 52.03,
+        "ROA": 0.62,
+        "ROE": 11.22,
+        "netProfitAttributableToParent": 45.5,
+        "netInterestMargin": 1.65,
+        "costToIncomeRatio": 32.78
+      },
+      "assetQuality": {
+        "NPLRatio": 1.59,
+        "provisionCoverageRatio": 211.53
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 8.69,
+        "CAR": 12.58
+      }
+    },
+    "2018": {
+      "scale": {
+        "totalAssets": 9211.0,
+        "totalLoans": 3326.68,
+        "totalDeposits": 5266.38
+      },
+      "profitability": {
+        "operatingRevenue": 170.54,
+        "netProfit": 58.06,
+        "ROA": 0.66,
+        "ROE": 10.85,
+        "netProfitAttributableToParent": 54.12,
+        "netInterestMargin": 1.62,
+        "costToIncomeRatio": 30.82
+      },
+      "assetQuality": {
+        "NPLRatio": 1.45,
+        "provisionCoverageRatio": 255.45
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 8.17,
+        "CAR": 13.35
+      }
+    },
+    "2019": {
+      "scale": {
+        "totalAssets": 10241.0,
+        "totalLoans": 3966.58,
+        "totalDeposits": 6256.26
+      },
+      "profitability": {
+        "operatingRevenue": 214.09,
+        "netProfit": 69.21,
+        "ROA": 0.72,
+        "ROE": 11.42,
+        "netProfitAttributableToParent": 65.99,
+        "netInterestMargin": 1.73,
+        "costToIncomeRatio": 29.45
+      },
+      "assetQuality": {
+        "NPLRatio": 1.34,
+        "provisionCoverageRatio": 316.71
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 8.38,
+        "CAR": 13.54
+      }
+    },
+    "2020": {
+      "scale": {
+        "totalAssets": 11693.0,
+        "totalLoans": 4666.86,
+        "totalDeposits": 7036.68
+      },
+      "profitability": {
+        "operatingRevenue": 251.59,
+        "netProfit": 79.41,
+        "ROA": 0.71,
+        "ROE": 10.42,
+        "netProfitAttributableToParent": 71.36,
+        "netInterestMargin": 1.98,
+        "costToIncomeRatio": 27.86
+      },
+      "assetQuality": {
+        "NPLRatio": 1.07,
+        "provisionCoverageRatio": 469.54
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 8.53,
+        "CAR": 13.24
+      }
+    },
+    "2021": {
+      "scale": {
+        "totalAssets": 13905.65,
+        "totalLoans": 5556.68,
+        "totalDeposits": 8106.38
+      },
+      "profitability": {
+        "operatingRevenue": 293.61,
+        "netProfit": 92.61,
+        "ROA": 0.72,
+        "ROE": 10.84,
+        "netProfitAttributableToParent": 92.61,
+        "netInterestMargin": 1.83,
+        "costToIncomeRatio": 27.3
+      },
+      "assetQuality": {
+        "NPLRatio": 0.86,
+        "provisionCoverageRatio": 567.71
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 8.43,
+        "CAR": 13.62
+      }
+    },
+    "2022": {
+      "scale": {
+        "totalAssets": 16165.38,
+        "totalLoans": 6546.58,
+        "totalDeposits": 9216.63
+      },
+      "profitability": {
+        "operatingRevenue": 329.32,
+        "netProfit": 116.79,
+        "ROA": 0.77,
+        "ROE": 12.38,
+        "netProfitAttributableToParent": 116.79,
+        "netInterestMargin": 1.69,
+        "costToIncomeRatio": 29.64
+      },
+      "assetQuality": {
+        "NPLRatio": 0.77,
+        "provisionCoverageRatio": 565.1
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 8.06,
+        "CAR": 12.89
+      }
+    },
+    "2023": {
+      "scale": {
+        "totalAssets": 18413.31,
+        "totalLoans": 8072.36,
+        "totalDeposits": 10453.2
+      },
+      "profitability": {
+        "operatingRevenue": 350.16,
+        "netProfit": 143.83,
+        "ROA": 0.82,
+        "ROE": 13.71,
+        "netProfitAttributableToParent": 143.83,
+        "netInterestMargin": 1.5,
+        "costToIncomeRatio": 29.4
+      },
+      "assetQuality": {
+        "NPLRatio": 0.76,
+        "provisionCoverageRatio": 561.42
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 8.09,
+        "CAR": 12.51
+      }
+    },
+    "2024": {
+      "scale": {
+        "totalAssets": 21123.56,
+        "totalLoans": 9374.99,
+        "totalDeposits": 12725.51
+      },
+      "profitability": {
+        "operatingRevenue": 383.81,
+        "netProfit": 170.06,
+        "ROA": 0.9,
+        "ROE": 13.73,
+        "netProfitAttributableToParent": 169.83,
+        "netInterestMargin": 1.41,
+        "costToIncomeRatio": 29.41
+      },
+      "assetQuality": {
+        "NPLRatio": 0.76,
+        "provisionCoverageRatio": 541.45
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 8.26,
+        "CAR": 13.8
+      }
+    },
+    "2025": {
+      "scale": {
+        "totalAssets": 23628.06,
+        "totalLoans": 10718.76,
+        "totalDeposits": 14405.79
+      },
+      "profitability": {
+        "operatingRevenue": 387.99,
+        "netProfit": 190.29,
+        "ROE": 14.65,
+        "netProfitAttributableToParent": 190.29,
+        "costToIncomeRatio": 30.03
+      },
+      "assetQuality": {
+        "NPLRatio": 0.76,
+        "provisionCoverageRatio": 502.24
+      },
+      "capitalAdequacy": {
+        "CAR": 14.37
+      }
+    }
+  },
+  "metadata": {
+    "dataSource": [
+      "annual_report"
+    ],
+    "lastUpdated": "2026-07-12T16:51:31",
+    "unitConvention": {
+      "currency": "CNY",
+      "amountUnit": "hundred_million_yuan",
+      "ratioUnit": "percent"
+    },
+    "notes": [
+      {
+        "year": 2025,
+        "note": "2025年年报数据"
+      }
+    ],
+    "disclaimer": "数据来源于各银行公开年报，仅供研究参考，不构成投资建议。"
+  }
+}

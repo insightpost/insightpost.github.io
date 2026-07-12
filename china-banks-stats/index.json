@@ -1,0 +1,259 @@
+{
+  "datasetName": "中国头部银行经营数据库（2016-2025）",
+  "schemaVersion": "1.0.0",
+  "description": "包含6家国有大行、9家头部股份制银行、3家政策性银行、10家头部上市城商行共28家银行2016-2025年的核心经营数据",
+  "createdAt": "2026-07-12T16:51:31",
+  "coverage": {
+    "state_owned_large": {
+      "count": 6,
+      "banks": [
+        {
+          "bankId": "ICBC",
+          "shortName": "工商银行",
+          "chineseName": "中国工商银行股份有限公司",
+          "aShareCode": "601398.SH",
+          "file": "data/state_owned/ICBC_工商银行.json"
+        },
+        {
+          "bankId": "ABC",
+          "shortName": "农业银行",
+          "chineseName": "中国农业银行股份有限公司",
+          "aShareCode": "601288.SH",
+          "file": "data/state_owned/ABC_农业银行.json"
+        },
+        {
+          "bankId": "BOC",
+          "shortName": "中国银行",
+          "chineseName": "中国银行股份有限公司",
+          "aShareCode": "601988.SH",
+          "file": "data/state_owned/BOC_中国银行.json"
+        },
+        {
+          "bankId": "CCB",
+          "shortName": "建设银行",
+          "chineseName": "中国建设银行股份有限公司",
+          "aShareCode": "601939.SH",
+          "file": "data/state_owned/CCB_建设银行.json"
+        },
+        {
+          "bankId": "BOCOM",
+          "shortName": "交通银行",
+          "chineseName": "交通银行股份有限公司",
+          "aShareCode": "601328.SH",
+          "file": "data/state_owned/BOCOM_交通银行.json"
+        },
+        {
+          "bankId": "PSBC",
+          "shortName": "邮储银行",
+          "chineseName": "中国邮政储蓄银行股份有限公司",
+          "aShareCode": "601658.SH",
+          "file": "data/state_owned/PSBC_邮储银行.json"
+        }
+      ]
+    },
+    "joint_stock": {
+      "count": 9,
+      "banks": [
+        {
+          "bankId": "CMB",
+          "shortName": "招商银行",
+          "chineseName": "招商银行股份有限公司",
+          "aShareCode": "600036.SH",
+          "file": "data/joint_stock/CMB_招商银行.json"
+        },
+        {
+          "bankId": "CIB",
+          "shortName": "兴业银行",
+          "chineseName": "兴业银行股份有限公司",
+          "aShareCode": "601166.SH",
+          "file": "data/joint_stock/CIB_兴业银行.json"
+        },
+        {
+          "bankId": "CITIC",
+          "shortName": "中信银行",
+          "chineseName": "中信银行股份有限公司",
+          "aShareCode": "601998.SH",
+          "file": "data/joint_stock/CITIC_中信银行.json"
+        },
+        {
+          "bankId": "SPDB",
+          "shortName": "浦发银行",
+          "chineseName": "上海浦东发展银行股份有限公司",
+          "aShareCode": "600000.SH",
+          "file": "data/joint_stock/SPDB_浦发银行.json"
+        },
+        {
+          "bankId": "CMBC",
+          "shortName": "民生银行",
+          "chineseName": "中国民生银行股份有限公司",
+          "aShareCode": "600016.SH",
+          "file": "data/joint_stock/CMBC_民生银行.json"
+        },
+        {
+          "bankId": "CEB",
+          "shortName": "光大银行",
+          "chineseName": "中国光大银行股份有限公司",
+          "aShareCode": "601818.SH",
+          "file": "data/joint_stock/CEB_光大银行.json"
+        },
+        {
+          "bankId": "PAB",
+          "shortName": "平安银行",
+          "chineseName": "平安银行股份有限公司",
+          "aShareCode": "000001.SZ",
+          "file": "data/joint_stock/PAB_平安银行.json"
+        },
+        {
+          "bankId": "HXB",
+          "shortName": "华夏银行",
+          "chineseName": "华夏银行股份有限公司",
+          "aShareCode": "600015.SH",
+          "file": "data/joint_stock/HXB_华夏银行.json"
+        },
+        {
+          "bankId": "CZB",
+          "shortName": "浙商银行",
+          "chineseName": "浙商银行股份有限公司",
+          "aShareCode": "601916.SH",
+          "file": "data/joint_stock/CZB_浙商银行.json"
+        }
+      ]
+    },
+    "policy_bank": {
+      "count": 3,
+      "banks": [
+        {
+          "bankId": "CDB",
+          "shortName": "国开行",
+          "chineseName": "国家开发银行",
+          "aShareCode": null,
+          "file": "data/policy/CDB_国开行.json"
+        },
+        {
+          "bankId": "EXIM",
+          "shortName": "进出口银行",
+          "chineseName": "中国进出口银行",
+          "aShareCode": null,
+          "file": "data/policy/EXIM_进出口银行.json"
+        },
+        {
+          "bankId": "ADBC",
+          "shortName": "农发行",
+          "chineseName": "中国农业发展银行",
+          "aShareCode": null,
+          "file": "data/policy/ADBC_农发行.json"
+        }
+      ]
+    },
+    "city_commercial": {
+      "count": 10,
+      "banks": [
+        {
+          "bankId": "BOB",
+          "shortName": "北京银行",
+          "chineseName": "北京银行股份有限公司",
+          "aShareCode": "601169.SH",
+          "file": "data/city_commercial/BOB_北京银行.json"
+        },
+        {
+          "bankId": "JSB",
+          "shortName": "江苏银行",
+          "chineseName": "江苏银行股份有限公司",
+          "aShareCode": "600919.SH",
+          "file": "data/city_commercial/JSB_江苏银行.json"
+        },
+        {
+          "bankId": "BOS",
+          "shortName": "上海银行",
+          "chineseName": "上海银行股份有限公司",
+          "aShareCode": "601229.SH",
+          "file": "data/city_commercial/BOS_上海银行.json"
+        },
+        {
+          "bankId": "NBCB",
+          "shortName": "宁波银行",
+          "chineseName": "宁波银行股份有限公司",
+          "aShareCode": "002142.SZ",
+          "file": "data/city_commercial/NBCB_宁波银行.json"
+        },
+        {
+          "bankId": "NJCB",
+          "shortName": "南京银行",
+          "chineseName": "南京银行股份有限公司",
+          "aShareCode": "601009.SH",
+          "file": "data/city_commercial/NJCB_南京银行.json"
+        },
+        {
+          "bankId": "HZB",
+          "shortName": "杭州银行",
+          "chineseName": "杭州银行股份有限公司",
+          "aShareCode": "600926.SH",
+          "file": "data/city_commercial/HZB_杭州银行.json"
+        },
+        {
+          "bankId": "BOCD",
+          "shortName": "成都银行",
+          "chineseName": "成都银行股份有限公司",
+          "aShareCode": "601838.SH",
+          "file": "data/city_commercial/BOCD_成都银行.json"
+        },
+        {
+          "bankId": "CSCB",
+          "shortName": "长沙银行",
+          "chineseName": "长沙银行股份有限公司",
+          "aShareCode": "601577.SH",
+          "file": "data/city_commercial/CSCB_长沙银行.json"
+        },
+        {
+          "bankId": "GYCB",
+          "shortName": "贵阳银行",
+          "chineseName": "贵阳银行股份有限公司",
+          "aShareCode": "601997.SH",
+          "file": "data/city_commercial/GYCB_贵阳银行.json"
+        },
+        {
+          "bankId": "QDBC",
+          "shortName": "青岛银行",
+          "chineseName": "青岛银行股份有限公司",
+          "aShareCode": "002948.SZ",
+          "file": "data/city_commercial/QDBC_青岛银行.json"
+        }
+      ]
+    }
+  },
+  "indicators": {
+    "scale": [
+      "总资产",
+      "总负债",
+      "净资产",
+      "贷款总额",
+      "存款总额"
+    ],
+    "profitability": [
+      "营业收入",
+      "净利息收入",
+      "非利息收入",
+      "净利润",
+      "归母净利润",
+      "净息差",
+      "ROA",
+      "ROE",
+      "成本收入比"
+    ],
+    "assetQuality": [
+      "不良贷款余额",
+      "不良贷款率",
+      "拨备覆盖率"
+    ],
+    "capitalAdequacy": [
+      "核心一级资本充足率",
+      "一级资本充足率",
+      "资本充足率"
+    ]
+  },
+  "unitConvention": {
+    "currency": "人民币(CNY)",
+    "amount": "亿元",
+    "ratio": "百分比(%)"
+  }
+}

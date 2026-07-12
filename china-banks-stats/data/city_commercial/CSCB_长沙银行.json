@@ -1,0 +1,255 @@
+{
+  "schemaVersion": "1.0.0",
+  "bankInfo": {
+    "bankId": "CSCB",
+    "bankName": {
+      "chineseName": "长沙银行股份有限公司",
+      "englishName": "Bank of Changsha Co., Ltd.",
+      "shortName": "长沙银行"
+    },
+    "bankType": "city_commercial",
+    "establishmentDate": "1997-05-25",
+    "headquarters": {
+      "province": "湖南省",
+      "city": "长沙市"
+    },
+    "listingInfo": {
+      "isListed": true,
+      "aShareCode": "601577.SH",
+      "hShareCode": null
+    }
+  },
+  "annualData": {
+    "2016": {
+      "scale": {},
+      "profitability": {},
+      "assetQuality": {},
+      "capitalAdequacy": {}
+    },
+    "2017": {
+      "scale": {},
+      "profitability": {
+        "ROE": 18.25
+      },
+      "assetQuality": {},
+      "capitalAdequacy": {}
+    },
+    "2018": {
+      "scale": {
+        "totalAssets": 5266.3,
+        "totalLoans": 2044.03,
+        "totalDeposits": 3412.02
+      },
+      "profitability": {
+        "operatingRevenue": 139.41,
+        "netProfit": 45.78,
+        "ROA": 0.9,
+        "ROE": 16.91,
+        "netProfitAttributableToParent": 44.79,
+        "netInterestMargin": 2.45,
+        "costToIncomeRatio": 31.25
+      },
+      "assetQuality": {
+        "NPLRatio": 1.29,
+        "provisionCoverageRatio": 275.4
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 9.55,
+        "CAR": 13.28
+      }
+    },
+    "2019": {
+      "scale": {
+        "totalAssets": 6019.68,
+        "totalLoans": 2586.36,
+        "totalDeposits": 3886.56
+      },
+      "profitability": {
+        "operatingRevenue": 170.17,
+        "netProfit": 51.58,
+        "ROA": 0.92,
+        "ROE": 15.61,
+        "netProfitAttributableToParent": 50.79,
+        "netInterestMargin": 2.48,
+        "costToIncomeRatio": 31.86
+      },
+      "assetQuality": {
+        "NPLRatio": 1.22,
+        "provisionCoverageRatio": 288.56
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 9.32,
+        "CAR": 13.52
+      }
+    },
+    "2020": {
+      "scale": {
+        "totalAssets": 7043.36,
+        "totalLoans": 3186.56,
+        "totalDeposits": 4456.28
+      },
+      "profitability": {
+        "operatingRevenue": 180.91,
+        "netProfit": 54.28,
+        "ROA": 0.86,
+        "ROE": 13.76,
+        "netProfitAttributableToParent": 53.38,
+        "netInterestMargin": 2.42,
+        "costToIncomeRatio": 30.65
+      },
+      "assetQuality": {
+        "NPLRatio": 1.21,
+        "provisionCoverageRatio": 293.86
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 9.22,
+        "CAR": 13.62
+      }
+    },
+    "2021": {
+      "scale": {
+        "totalAssets": 7962.56,
+        "totalLoans": 3686.32,
+        "totalDeposits": 5086.36
+      },
+      "profitability": {
+        "operatingRevenue": 208.88,
+        "netProfit": 63.88,
+        "ROA": 0.85,
+        "ROE": 13.26,
+        "netProfitAttributableToParent": 62.98,
+        "netInterestMargin": 2.35,
+        "costToIncomeRatio": 30.18
+      },
+      "assetQuality": {
+        "NPLRatio": 1.2,
+        "provisionCoverageRatio": 301.62
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 9.76,
+        "CAR": 13.58
+      }
+    },
+    "2022": {
+      "scale": {
+        "totalAssets": 9047.33,
+        "totalLoans": 4256.36,
+        "totalDeposits": 5686.58
+      },
+      "profitability": {
+        "operatingRevenue": 228.68,
+        "netProfit": 71.44,
+        "ROA": 0.82,
+        "ROE": 12.57,
+        "netProfitAttributableToParent": 68.11,
+        "netInterestMargin": 2.41,
+        "costToIncomeRatio": 29.86
+      },
+      "assetQuality": {
+        "NPLRatio": 1.16,
+        "provisionCoverageRatio": 314.21
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 9.57,
+        "CAR": 13.32
+      }
+    },
+    "2023": {
+      "scale": {
+        "totalAssets": 10200.33,
+        "totalLoans": 4886.25,
+        "totalDeposits": 6586.32
+      },
+      "profitability": {
+        "operatingRevenue": 248.02,
+        "netProfit": 76.16,
+        "ROA": 0.8,
+        "ROE": 12.5,
+        "netProfitAttributableToParent": 74.64,
+        "netInterestMargin": 2.31,
+        "costToIncomeRatio": 30.12
+      },
+      "assetQuality": {
+        "NPLRatio": 1.15,
+        "provisionCoverageRatio": 314.21
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 9.85,
+        "CAR": 13.82
+      }
+    },
+    "2024": {
+      "scale": {
+        "totalAssets": 11467.48,
+        "totalLoans": 5451.09,
+        "totalDeposits": 7229.75
+      },
+      "profitability": {
+        "operatingRevenue": 259.36,
+        "netProfit": 80.24,
+        "ROA": 0.75,
+        "ROE": 11.81,
+        "netProfitAttributableToParent": 78.27,
+        "netInterestMargin": 2.11,
+        "costToIncomeRatio": 30.88
+      },
+      "assetQuality": {
+        "NPLRatio": 1.17,
+        "provisionCoverageRatio": 312.8
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 10.12,
+        "CAR": 14.2
+      }
+    },
+    "2025": {
+      "scale": {
+        "totalAssets": 12681.49,
+        "totalLoans": 6116.85,
+        "totalDeposits": 7886.46
+      },
+      "profitability": {
+        "operatingRevenue": 254.71,
+        "ROA": 0.68,
+        "ROE": 11.24,
+        "netProfitAttributableToParent": 81.08,
+        "netInterestMargin": 1.85,
+        "costToIncomeRatio": 27.75
+      },
+      "assetQuality": {
+        "NPLRatio": 1.15,
+        "provisionCoverageRatio": 280.86
+      },
+      "capitalAdequacy": {
+        "coreTier1CAR": 10.05,
+        "CAR": 13.95
+      }
+    }
+  },
+  "metadata": {
+    "dataSource": [
+      "annual_report"
+    ],
+    "lastUpdated": "2026-07-12T16:51:31",
+    "unitConvention": {
+      "currency": "CNY",
+      "amountUnit": "hundred_million_yuan",
+      "ratioUnit": "percent"
+    },
+    "notes": [
+      {
+        "year": 2016,
+        "note": "上市前数据未公开披露完整年报"
+      },
+      {
+        "year": 2017,
+        "note": "上市前数据未公开披露完整年报"
+      },
+      {
+        "year": 2025,
+        "note": "2025年年报数据"
+      }
+    ],
+    "disclaimer": "数据来源于各银行公开年报，仅供研究参考，不构成投资建议。"
+  }
+}
